@@ -3,14 +3,14 @@ import Airtable from "airtable";
 export async function getShifts() {
   // Initialize the Airtable client with the API key
   const base = new Airtable({
-    apiKey: process.env.AIRTABLE_API_KEY,
+    apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
   }).base("appHZw8p3zb6QrFz3");
 
   // Select the table and fetch all records
   const records = await base("Shifts")
     .select({
       view: "Grid view",
-      filterByFormula: "AND({active} = 'True', {status} = 'open')",
+      filterByFormula: "AND({active} = 'True', {status} = 'Open')",
     })
     .all();
 
@@ -27,6 +27,7 @@ export async function getShifts() {
   }));
 
   console.log(shifts)
+  
 
   return shifts;
 }

@@ -1,51 +1,60 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Stack, Text } from '@chakra-ui/react'
+
 
 type JobCardProps = {
   id: string;
-  uuid: string;
+  uuid?: string;
   shift_title: string;
+  position: string;
+  clinic_name: string;
   skills_required: string[];
   city: string;
   start_date: string;
-  clinic_name: string;
-  position: string;
 };
 
 function JobCard({
   id,
   uuid,
   shift_title,
+  position,
+  clinic_name,
   skills_required,
   city,
   start_date,
-  clinic_name,
-  position
+  
 }: JobCardProps) {
   return (
-    <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Box p="6">
-        <Box display="flex" alignItems="baseline">
-          <Text fontWeight="semibold" fontSize="xl" mb="2">
-            {shift_title}
-          </Text>
-          <Text fontSize="sm" color="gray.500" ml="2">
-            {start_date}
-          </Text>
-        </Box>
-        <Text color="gray.500" mb="4">
-          {clinic_name} - {city}
-        </Text>
-       
-        <Box mt="4">
-          {skills_required.map((skill) => (
-            <Box key={skill} mr="2" display="inline-block" color="gray.500">
-              {skill}
-            </Box>
-          ))}
-        </Box>
+    <Box as="section" py={{ base: '4', md: '8' }}>
+    <Container maxW="3xl">
+      <Box bg="bg-surface" boxShadow="sm" borderRadius="lg" p={{ base: '4', md: '6' }}>
+        <Stack spacing="5">
+          <Stack spacing="1">
+            <Text fontSize="lg" fontWeight="medium">
+              Updates Available
+            </Text>
+            <Text fontSize="sm" color="muted">
+              A new version is available. Please upgrade for the best experience.
+            </Text>
+          </Stack>
+          <Stack direction={{ base: 'column', md: 'row' }} spacing="3">
+          <Box mt="4">
+{skills_required.map((skill) => (
+  <Box key={skill} mr="2" display="inline-block" color="gray.500">
+    {skill}
+  </Box>
+))}
+</Box>
+          </Stack>
+          <Stack direction={{ base: 'column', md: 'row' }} spacing="3">
+            <Button variant="secondary">Skip</Button>
+            <Button variant="primary">Download</Button>
+          </Stack>
+        </Stack>
       </Box>
-    </Box>
+    </Container>
+  </Box>
   );
 }
 
 export default JobCard;
+

@@ -1,42 +1,37 @@
 import { Box, SimpleGrid, Link } from "@chakra-ui/react";
 import JobCard from "../components/JobCard";
 import { getShifts } from "../services/airtable";
+import { useState, useEffect } from "react";
 
 interface Shift {
-    id: string;
-    uuid: string;
-    shift_title: string;
-    skills_required: string[];
-    city: string;
-    start_date: string;
-    clinic_name: string;
-    position: string;
-  }
-  
-
-
-export async function getStaticProps() {
-  // Fetch job data from Airtable
-  const shifts = await getShifts();
-  console.log(shifts)
-
-  // Return the jobs as props
-  return {
-    props: {
-      shifts,
-    },
-  };
+  id: string;
+  uuid?: string;
+  shift_title: string;
+  position: string;
+  clinic_name: string;
+  skills_required: string[];
+  city: string;
+  start_date: string;
 }
 
-  
+function Jobs() {
+  const [shifts, setShifts] = useState<Shift[]>([]);
 
-function Jobs({ shifts }: { shifts: Shift[] }) {
+  useEffect(() => {
+    async function fetchData() {
+      const shiftsData = await getShifts();
+      setShifts(shiftsData);
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <Box p="4">
-      <SimpleGrid columns={[1, 2, 3]} spacing="4">
+      <SimpleGrid columns={[1]} spacing="4">
         {shifts.map((shift) => (
           <Link key={shift.id} href={`/job/${shift.id}`}>
-            <a>
+          
               <JobCard
                 id={shift.id}
                 uuid={shift.uuid}
@@ -47,7 +42,7 @@ function Jobs({ shifts }: { shifts: Shift[] }) {
                 city={shift.city}
                 start_date={shift.start_date}
               />
-            </a>
+            
           </Link>
         ))}
       </SimpleGrid>
