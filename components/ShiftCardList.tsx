@@ -2,8 +2,9 @@ import { Box, SimpleGrid, Link } from "@chakra-ui/react";
 import JobCard from "./JobCard";
 
 interface JobsProps {
-  shifts: Shift[];
-}
+    shifts: Shift[];
+    filters: Filters;
+  }
 
 export interface Shift {
   id: string;
@@ -16,11 +17,29 @@ export interface Shift {
   start_date: string;
 }
 
-export default function ShiftCardList({ shifts }: JobsProps) {
+interface Filters {
+  skills: string[];
+  size: string[];
+  brand: string[];
+  // add more filter types here
+}
+
+export default function ShiftCardList({ shifts, filters }: JobsProps) {
+
+  const filteredShifts = filters.skills.length > 0 ? shifts.filter((shift) => {
+    // Apply filter logic based on the `filters` prop
+    return (
+      filters.skills.some((selectedSkill) => shift.skills_required.includes(selectedSkill))
+      // add more filter types here
+    );
+  }) : shifts;
+
+  console.log('filteredShifts', filteredShifts);
+
   return (
     <Box p="4">
       <SimpleGrid columns={[1]} spacing="4">
-        {shifts.map((shift) => (
+        {filteredShifts.map((shift) => (
           <Link key={shift.id} href={`/job/${shift.id}`}>
           
               <JobCard

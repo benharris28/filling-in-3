@@ -50,6 +50,15 @@ export const colorFilter = {
       { label: 'Unisex', count: 10, value: 'unisex' },
     ],
   }
+
+  export const skillsFilter = {
+    defaultValue: [],
+    options: [
+      { label: 'Laughing Gas', value: 'Laughing Gas' },
+      { label: 'Flossing', value: 'Flossing' },
+      { label: 'Scraping', value: 'Scraping' },
+    ],
+  }
   
   export const breadcrumbData = [
     { label: 'Home', slug: '/' },

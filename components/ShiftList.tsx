@@ -7,14 +7,26 @@ import { ProductBreadcrumb } from './ProductBreadcrumb'
 import { SizePicker } from './SizePicker'
 import { SortBySelect } from './SortBySelect'
 import { MobileFilter } from './MobileFilter'
-import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter } from '../pages/_data'
+import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter } from '../pages/_data'
 import ShiftCardList, { Shift } from "./ShiftCardList";
 import { getShifts } from "../services/airtable";
+
+interface Filters {
+  skills: string[];
+  size: string[];
+  brand: string[];
+  // add more filter types here
+}
 
 export default function ShiftList() {
   const [shifts, setShifts] = useState<Shift[]>([]);
 
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([])
+  const [filters, setFilters] = useState<Filters>({
+    skills: [],
+    size: [],
+    brand: [],
+    // initialize more filter types here
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -25,11 +37,14 @@ export default function ShiftList() {
     fetchData();
   }, []);
 
-  const handleFilterChange = (value: string[]) => {
-    setSelectedFilters(value)
+  const handleFilterChange = (filterType: string, selectedOptions: string[]) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterType]: selectedOptions,
+    }));
   }
 
-  console.log(selectedFilters)
+  console.log(filters);
 
 return (
   <Box
@@ -44,9 +59,9 @@ return (
         <Stack spacing="10" maxW="240px" display={{ base: 'none', md: 'flex' }}>
           <CheckboxFilter 
             spacing="3" 
-            options={genderFilter.options} 
-            label="Gender" 
-            onChange={handleFilterChange}
+            options={skillsFilter.options} 
+            label="Skills" 
+            onChange={(selectedOptions) => handleFilterChange("skills", selectedOptions)}
             />
           <SizePicker {...sizeFilter} label="Size" />
           <ColorPicker {...colorFilter} label="Color" />
@@ -55,7 +70,7 @@ return (
             options={pinkFilters.options} 
             label="Brand" 
             showSearch 
-            onChange={handleFilterChange}
+            onChange={(selectedOptions) => handleFilterChange("brand", selectedOptions)}
             />
           <Stack spacing="5">
             <label>Price range</label>
@@ -90,7 +105,7 @@ return (
             </HStack>
           </Stack>
           <Box mt="6" borderWidth="2px" minH="480px" rounded="xl" borderStyle="dashed">
-            <ShiftCardList shifts={shifts} />
+            <ShiftCardList shifts={shifts} filters={filters} />
           </Box>
         </Box>
       </Grid>
