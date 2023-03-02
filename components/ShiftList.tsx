@@ -96,7 +96,7 @@ return (
           >
             <Stack direction={{ base: 'column', md: 'row' }} align="baseline">
               <Heading size="md" fontSize="2xl">
-                Watches
+                Available Shifts
               </Heading>
               <Text color="gray.500">(300 products)</Text>
             </Stack>
