@@ -1,4 +1,4 @@
-import { Box, Button, Container, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Container, Stack, Text, Tag, Wrap } from '@chakra-ui/react'
 
 
 type JobCardProps = {
@@ -24,30 +24,36 @@ function JobCard({
   
 }: JobCardProps) {
   return (
-    <Box as="section" py={{ base: '4', md: '8' }}>
+    <Box as="section" py={{ base: '0', md: '0' }}>
     <Container maxW="3xl">
-      <Box bg="bg-surface" boxShadow="sm" borderRadius="lg" p={{ base: '4', md: '6' }}>
-        <Stack spacing="5">
+      <Box bg="bg-surface" boxShadow="sm" borderRadius="lg" p={{ base: '4', md: '4' }}>
+        <Stack spacing="1">
           <Stack spacing="1">
             <Text fontSize="lg" fontWeight="medium">
-              Updates Available
+              {shift_title}
             </Text>
             <Text fontSize="sm" color="muted">
-              A new version is available. Please upgrade for the best experience.
+              {position}
             </Text>
           </Stack>
+          <Text fontWeight="semibold" mt="8" mb="2">
+            Interests
+          </Text>
+          <Wrap shouldWrapChildren>
+                      {skills_required.map((skill) => (
+              <Tag key={skill}>
+                {skill}
+              </Tag>
+            ))} 
+          </Wrap>
           <Stack direction={{ base: 'column', md: 'row' }} spacing="3">
-          <Box mt="4">
-{skills_required.map((skill) => (
-  <Box key={skill} mr="2" display="inline-block" color="gray.500">
-    {skill}
-  </Box>
-))}
-</Box>
+        
+
+
           </Stack>
           <Stack direction={{ base: 'column', md: 'row' }} spacing="3">
-            <Button variant="secondary">Skip</Button>
-            <Button variant="primary">Download</Button>
+            <Button variant="secondary">Apply</Button>
+          
           </Stack>
         </Stack>
       </Box>

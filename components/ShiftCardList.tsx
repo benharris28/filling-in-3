@@ -39,7 +39,7 @@ export default function ShiftCardList({ shifts, filters }: JobsProps) {
 
   return (
     <Box p="4">
-      <SimpleGrid columns={[1]} spacing="4">
+      <SimpleGrid columns={[1]} spacing="2">
         {filteredShifts.map((shift) => (
           <Link key={shift.id} href={`/job/${shift.id}`}>
           

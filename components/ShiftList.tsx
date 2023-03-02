@@ -48,7 +48,7 @@ export default function ShiftList() {
 
 return (
   <Box
-    maxW="7xl"
+    maxW="8xl"
     mx="auto"
     px={{ base: '4', md: '8', lg: '12' }}
     py={{ base: '6', md: '8', lg: '12' }}
@@ -98,7 +98,7 @@ return (
               <Heading size="md" fontSize="2xl">
                 Available Shifts
               </Heading>
-              <Text color="gray.500">(300 products)</Text>
+              
             </Stack>
             <MobileFilter />
             <HStack display={{ base: 'none', md: 'flex' }}>
