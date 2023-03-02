@@ -17,7 +17,7 @@ import {
   import { PriceRangePicker } from './PriceRangePicker'
   import { SizePicker } from './SizePicker'
   import { SortBySelect } from './SortBySelect'
-  import { pinkFilters, colorFilter, sizeFilter } from '../pages/_data'
+  import { pinkFilters, colorFilter, sizeFilter } from '../data/data'
   
   export const MobileFilter = () => {
     const { isOpen, onClose, onOpen } = useDisclosure()

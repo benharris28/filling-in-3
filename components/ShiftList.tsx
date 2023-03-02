@@ -7,7 +7,7 @@ import { ProductBreadcrumb } from './ProductBreadcrumb'
 import { SizePicker } from './SizePicker'
 import { SortBySelect } from './SortBySelect'
 import { MobileFilter } from './MobileFilter'
-import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter } from '../pages/_data'
+import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter } from '../data/data'
 import ShiftCardList, { Shift } from "./ShiftCardList";
 import { getShifts } from "../services/airtable";
 
