@@ -29,8 +29,8 @@ import {
     const selectedOption = options.find((option) => option.value == value)
 
     const handleRoleChange = (selectedValue: string) => {
-      if (onchange) {
-        onchange(selectedValue);
+      if (props.onChange) {
+        props.onChange(selectedValue);
       }
     };
   
