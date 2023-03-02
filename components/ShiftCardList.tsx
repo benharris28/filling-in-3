@@ -19,7 +19,7 @@ export interface Shift {
 
 interface Filters {
   skills: string[];
-  size: string[];
+  role: string;
   brand: string[];
   // add more filter types here
 }
@@ -29,7 +29,8 @@ export default function ShiftCardList({ shifts, filters }: JobsProps) {
   const filteredShifts = filters.skills.length > 0 ? shifts.filter((shift) => {
     // Apply filter logic based on the `filters` prop
     return (
-      filters.skills.some((selectedSkill) => shift.skills_required.includes(selectedSkill))
+      filters.skills.some((selectedSkill) => shift.skills_required.includes(selectedSkill)) &&
+      (filters.role === "" || shift.position === filters.role)
       // add more filter types here
     );
   }) : shifts;

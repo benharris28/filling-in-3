@@ -5,6 +5,8 @@ import {
     HStack,
     useRadioGroup,
     UseRadioGroupProps,
+    Wrap,
+  WrapItem,
   } from '@chakra-ui/react'
   import { SizePickerButton } from './SizePickerButton'
   
@@ -15,15 +17,22 @@ import {
   
   interface SizePickerProps extends UseRadioGroupProps {
     options: Option[]
-    rootProps?: FormControlProps
-    hideLabel?: boolean
-    label?: string
+  rootProps?: FormControlProps
+  hideLabel?: boolean
+  label?: string
+  onChange?: (selectedValue: string) => void;
   }
   
   export const SizePicker = (props: SizePickerProps) => {
     const { options, rootProps, hideLabel, label, ...rest } = props
     const { getRadioProps, getRootProps, value } = useRadioGroup(rest)
     const selectedOption = options.find((option) => option.value == value)
+
+    const handleRoleChange = (selectedValue: string) => {
+      if (onchange) {
+        onchange(selectedValue);
+      }
+    };
   
     return (
       <FormControl {...rootProps}>
@@ -32,15 +41,17 @@ import {
             {label ?? `Size: ${selectedOption?.label}`}
           </FormLabel>
         )}
-        <HStack {...getRootProps()}>
+        <Wrap {...getRootProps()} spacing={2}>
           {options.map((option) => (
-            <SizePickerButton
-              key={option.value}
-              label={option.label}
-              {...getRadioProps({ value: option.value })}
-            />
+            <WrapItem key={option.value}>
+              <SizePickerButton
+                label={option.label}
+                {...getRadioProps({ value: option.value })}
+           
+              />
+            </WrapItem>
           ))}
-        </HStack>
+        </Wrap>
       </FormControl>
-    )
+    );
   }

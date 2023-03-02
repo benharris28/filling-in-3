@@ -7,13 +7,13 @@ import { ProductBreadcrumb } from './ProductBreadcrumb'
 import { SizePicker } from './SizePicker'
 import { SortBySelect } from './SortBySelect'
 import { MobileFilter } from './MobileFilter'
-import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter } from '../pages/_data'
+import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter } from '../pages/_data'
 import ShiftCardList, { Shift } from "./ShiftCardList";
 import { getShifts } from "../services/airtable";
 
 interface Filters {
   skills: string[];
-  size: string[];
+  role: string;
   brand: string[];
   // add more filter types here
 }
@@ -23,7 +23,7 @@ export default function ShiftList() {
 
   const [filters, setFilters] = useState<Filters>({
     skills: [],
-    size: [],
+    role: '',
     brand: [],
     // initialize more filter types here
   });
@@ -63,7 +63,11 @@ return (
             label="Skills" 
             onChange={(selectedOptions) => handleFilterChange("skills", selectedOptions)}
             />
-          <SizePicker {...sizeFilter} label="Size" />
+          <SizePicker 
+            {...roleFilter} 
+            label="Role" 
+            onChange={(selectedOptions) => handleFilterChange('role', selectedOptions)}
+            />
           <ColorPicker {...colorFilter} label="Color" />
           <CheckboxFilter 
             spacing="3" 

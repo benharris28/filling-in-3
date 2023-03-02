@@ -16,6 +16,16 @@ export const colorFilter = {
       { label: '40mm', value: '40' },
     ],
   }
+
+  export const roleFilter = {
+    defaultValue: 'Dentist',
+    options: [
+      { label: 'Dentist', value: 'Dentist' },
+      { label: 'Dental Assistant', value: 'Dental Assistant' },
+      { label: 'Hygenist', value: 'Hygenist' },
+      { label: 'Admin', value: 'Admin' },
+    ],
+  }
   
   export const priceFilter = {
     formatOptions: {
