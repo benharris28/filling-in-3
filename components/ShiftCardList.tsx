@@ -8,7 +8,7 @@ interface JobsProps {
 
 export interface Shift {
   id: string;
-  uuid?: string;
+  uuid: string;
   shift_title: string;
   position: string;
   clinic_name: string;

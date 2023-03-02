@@ -30,17 +30,17 @@ export default function ShiftList() {
 
   useEffect(() => {
     async function fetchData() {
-      const shiftsData = await getShifts();
+      const shiftsData = await getShifts() as Shift[];
       setShifts(shiftsData);
     }
 
     fetchData();
   }, []);
 
-  const handleFilterChange = (filterType: string, selectedOptions: string[]) => {
+  const handleFilterChange = (filterType: string, selectedOptions: string | string[]) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      [filterType]: selectedOptions,
+      [filterType]: Array.isArray(selectedOptions) ? selectedOptions : [selectedOptions],
     }));
   }
 
