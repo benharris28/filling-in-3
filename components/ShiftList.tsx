@@ -3,12 +3,12 @@ import { Box, Grid, Heading, HStack, Input, Stack, Text } from '@chakra-ui/react
 import { CheckboxFilter } from './CheckboxFilter'
 import { ColorPicker } from './ColorPicker'
 import { PriceRangePicker } from './PriceRangePicker'
-import { ProductBreadcrumb } from './ProductBreadcrumb'
 import { SizePicker } from './SizePicker'
 import { SortBySelect } from './SortBySelect'
 import { MobileFilter } from './MobileFilter'
 import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter, cityFilter } from '../data/data'
 import ShiftCardList, { Shift } from "./ShiftCardList";
+import CenteredPageHeader from "./CenteredPageHeader";
 import { getShifts } from "../services/airtable";
 
 
@@ -51,12 +51,14 @@ export default function ShiftList() {
 
 return (
   <Box
+    width='100%'
     maxW="1200px"
     mx="auto"
     px={{ base: '4', md: '8', lg: '12' }}
     py={{ base: '6', md: '8', lg: '12' }}
   >
-    <ProductBreadcrumb data={breadcrumbData} />
+    <CenteredPageHeader short_title="Shifts" title="Available Shifts" subtitle="These are the available shifts" />
+    
     <Box mt={{ base: '8', md: '16' }}>
       <Grid templateColumns={{ base: '1fr', md: '240px 1fr' }} gap="14">
         <Stack spacing="10" maxW="240px" display={{ base: 'none', md: 'flex' }}>
@@ -65,26 +67,22 @@ return (
             options={skillsFilter.options} 
             label="Skills" 
             onChange={(selectedOptions) => handleFilterChange("skills", selectedOptions)}
+            selectedOptions={filters.skills}
             />
             <CheckboxFilter 
             spacing="3" 
             options={cityFilter.options} 
             label="City" 
             onChange={(selectedOptions) => handleFilterChange("cities", selectedOptions)}
+            selectedOptions={filters.cities}
             />
           <SizePicker 
             {...roleFilter} 
             label="Role" 
             onChange={(selectedOptions) => handleFilterChange('role', selectedOptions)}
             />
-          <ColorPicker {...colorFilter} label="Color" />
-          <CheckboxFilter 
-            spacing="3" 
-            options={pinkFilters.options} 
-            label="Brand" 
-            showSearch 
-            onChange={(selectedOptions) => handleFilterChange("brand", selectedOptions)}
-            />
+          
+         
           <Stack spacing="5">
             <label>Price range</label>
             <PriceRangePicker defaultValue={[6, 40]} />
@@ -95,7 +93,7 @@ return (
           </Stack>
         </Stack>
 
-        <Box width="full">
+        <Box>
           <Stack
             spacing={{ base: '6', md: '4' }}
             direction={{ base: 'column', md: 'row' }}
@@ -109,7 +107,7 @@ return (
               </Heading>
               
             </Stack>
-            <MobileFilter />
+            <MobileFilter filters={filters} handleFilterChange={handleFilterChange} />
             <HStack display={{ base: 'none', md: 'flex' }}>
               <Text flexShrink={0} color="gray.500" fontSize="sm">
                 Sort by

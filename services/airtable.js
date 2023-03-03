@@ -23,7 +23,9 @@ export async function getShifts() {
     clinic_name: record.get("clinic_name"),
     skills_required: record.get("skills_required"),
     city: record.get("city"),
-    start_date: record.get("start_date")
+    start_date: record.get("start_date"),
+    hours: record.get("hours"),
+    total_pay: record.get("total_pay")
   }));
 
   console.log(shifts)

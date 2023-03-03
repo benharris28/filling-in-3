@@ -1,6 +1,16 @@
-import { Box, Button, Container, Stack, Text, Tag, Wrap, HStack, Icon } from '@chakra-ui/react'
-import { GoCalendar, GoGlobe, GoPencil, GoPerson } from 'react-icons/go'
-
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  Text,
+  Tag,
+  Wrap,
+  HStack,
+  Icon,
+  Flex
+} from "@chakra-ui/react";
+import { GoCalendar, GoGlobe, GoClock, GoPerson } from "react-icons/go";
 
 type JobCardProps = {
   id: string;
@@ -11,6 +21,8 @@ type JobCardProps = {
   skills_required: string[];
   city: string;
   start_date: string;
+  hours: number;
+  total_pay: number;
 };
 
 function JobCard({
@@ -22,55 +34,69 @@ function JobCard({
   skills_required,
   city,
   start_date,
-  
+  hours,
+  total_pay,
 }: JobCardProps) {
   return (
-    <Box as="section" py={{ base: '0', md: '0' }}>
-    <Container maxW="3xl">
-      <Box bg="bg-surface" boxShadow="sm" borderRadius="lg" p={{ base: '4', md: '4' }}>
-        <Stack spacing="1">
-          <Stack spacing="1">
-            <Text fontSize="lg" fontWeight="medium">
-              {shift_title}
-            </Text>
-            <HStack fontSize="sm">
-            <HStack fontSize="sm">
-              <Icon as={GoGlobe} color="gray.500" />
-              <Text>{city}</Text>
-             
-            </HStack>
+    <Box as="section" py={{ base: "0", md: "0" }}>
+      <Container maxW="3xl">
+        <Box
+          bg="bg-surface"
+          boxShadow="sm"
+          borderRadius="lg"
+          p={{ base: "4", md: "4" }}
+        >
+          <Stack spacing="2">
+            <Stack spacing="1">
+              <Flex justifyContent="space-between" alignItems="center">
+              <Text fontSize="lg" fontWeight="medium">
+                {shift_title}
+              </Text>
+              <Button variant="secondary">Apply</Button>
+
+              </Flex>
+              
+              <Wrap shouldWrapChildren my="4" spacing="4">
+                <HStack fontSize="sm" spacing='2'>
+                  <Icon as={GoGlobe} color="gray.500" />
+                  <Text>{city}</Text>
+                </HStack>
+                <HStack spacing='2'>
                 <Icon as={GoPerson} color="gray.500" />
                 <Text fontSize="sm" color="muted">
                   {position}
                 </Text>
-            </HStack>
-            
-          </Stack>
-          <Text fontWeight="semibold" mt="8" mb="2">
-            Skills Required
-          </Text>
-          <Wrap shouldWrapChildren>
-                      {skills_required.map((skill) => (
-              <Tag key={skill}>
-                {skill}
-              </Tag>
-            ))} 
-          </Wrap>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing="3">
-        
+                </HStack>
+              </Wrap>
+              <Wrap shouldWrapChildren my="4" spacing="4">
+                <HStack fontSize="sm">
+                  <Icon as={GoCalendar} color="gray.500" />
+                  <Text>{start_date}</Text>
+                </HStack>
+                <HStack>
+                  <Icon as={GoClock} color="gray.500" />
+                  <Text>{hours}</Text>
+                </HStack>
+              </Wrap>
+            </Stack>
 
-
+            <Wrap shouldWrapChildren>
+              {skills_required.map((skill) => (
+                <Tag bg='pink.100' key={skill}>{skill}</Tag>
+              ))}
+            </Wrap>
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              spacing="3"
+            ></Stack>
+            <Stack direction={{ base: "column", md: "row" }} spacing="3">
+              
+            </Stack>
           </Stack>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing="3">
-            <Button variant="secondary">Apply</Button>
-          
-          </Stack>
-        </Stack>
-      </Box>
-    </Container>
-  </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 }
 
 export default JobCard;
-

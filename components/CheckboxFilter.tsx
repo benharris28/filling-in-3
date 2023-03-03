@@ -20,10 +20,11 @@ import {
     onChange?: (value: string[]) => void
     spacing?: StackProps['spacing']
     showSearch?: boolean
+    selectedOptions?: string[];
   }
   
   export const CheckboxFilter = (props: CheckboxFilterProps) => {
-    const { options, label, hideLabel, spacing = '2', showSearch, onChange, ...rest } = props
+    const { options, label, hideLabel, spacing = '2', showSearch, selectedOptions = [], onChange, ...rest } = props
 
     const handleOnChange = (value: string[]) => {
       if (onChange) {
@@ -50,9 +51,14 @@ import {
             </InputRightElement>
           </InputGroup>
         )}
-        <CheckboxGroup onChange={handleOnChange} {...rest}>
+        <CheckboxGroup onChange={handleOnChange} value={selectedOptions} {...rest}>
           {options.map((option) => (
-            <Checkbox key={option.value} value={option.value} colorScheme="pink">
+            <Checkbox 
+              key={option.value} 
+              value={option.value}
+              colorScheme="pink"
+              isChecked={selectedOptions.includes(option.value)}
+              >
               <span>{option.label}</span>
               {option.count != null && (
                 <Box as="span" color="gray.500" fontSize="sm">

@@ -17,9 +17,22 @@ import {
   import { PriceRangePicker } from './PriceRangePicker'
   import { SizePicker } from './SizePicker'
   import { SortBySelect } from './SortBySelect'
-  import { pinkFilters, colorFilter, sizeFilter } from '../data/data'
+  import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter, cityFilter } from '../data/data'
   
-  export const MobileFilter = () => {
+  interface MobileFilterProps {
+    handleFilterChange: (filterType: string, selectedOptions: string | string[]) => void;
+    filters: Filters;
+  }
+
+  interface Filters {
+    skills: string[];
+    role: string;
+    brand: string[];
+    cities: string[];
+    // add more filter types here
+  }
+
+  export const MobileFilter = ({ handleFilterChange, filters }: MobileFilterProps) => {
     const { isOpen, onClose, onOpen } = useDisclosure()
     return (
       <>
@@ -41,7 +54,12 @@ import {
         </Flex>
         <FilterDrawer isOpen={isOpen} onClose={onClose}>
           <Stack spacing="6" divider={<StackDivider />}>
-            <CheckboxFilter label="Brands" options={pinkFilters.options} />
+            <CheckboxFilter 
+              options={cityFilter.options} 
+              label="City" 
+              onChange={(selectedOptions) => handleFilterChange("cities", selectedOptions)} 
+              selectedOptions={filters.cities}
+              />
             <MobilePriceFilter />
             <MobileSizeFilter />
             <MobileColorFilter />
