@@ -1,4 +1,5 @@
-import { Box, Button, Container, Stack, Text, Tag, Wrap } from '@chakra-ui/react'
+import { Box, Button, Container, Stack, Text, Tag, Wrap, HStack, Icon } from '@chakra-ui/react'
+import { GoCalendar, GoGlobe, GoPencil, GoPerson } from 'react-icons/go'
 
 
 type JobCardProps = {
@@ -32,12 +33,21 @@ function JobCard({
             <Text fontSize="lg" fontWeight="medium">
               {shift_title}
             </Text>
-            <Text fontSize="sm" color="muted">
-              {position}
-            </Text>
+            <HStack fontSize="sm">
+            <HStack fontSize="sm">
+              <Icon as={GoGlobe} color="gray.500" />
+              <Text>{city}</Text>
+             
+            </HStack>
+                <Icon as={GoPerson} color="gray.500" />
+                <Text fontSize="sm" color="muted">
+                  {position}
+                </Text>
+            </HStack>
+            
           </Stack>
           <Text fontWeight="semibold" mt="8" mb="2">
-            Interests
+            Skills Required
           </Text>
           <Wrap shouldWrapChildren>
                       {skills_required.map((skill) => (

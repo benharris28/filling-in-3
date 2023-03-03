@@ -26,6 +26,8 @@ export const colorFilter = {
       { label: 'Admin', value: 'Admin' },
     ],
   }
+
+
   
   export const priceFilter = {
     formatOptions: {
@@ -67,6 +69,15 @@ export const colorFilter = {
       { label: 'Laughing Gas', value: 'Laughing Gas' },
       { label: 'Flossing', value: 'Flossing' },
       { label: 'Scraping', value: 'Scraping' },
+    ],
+  }
+
+  export const cityFilter = {
+    defaultValue: [],
+    options: [
+      { label: 'Toronto', value: 'Toronto' },
+      { label: 'Mississauga', value: 'Mississauga' },
+      { label: 'Whitby', value: 'Whitby' },
     ],
   }
   
