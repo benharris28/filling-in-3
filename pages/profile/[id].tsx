@@ -1,5 +1,7 @@
+import ProfileShell from '../../components/profile/ProfileShell'
+
 export default function id() {
     return (
-        <div>Hello</div>
+        <ProfileShell />
     )
 }
