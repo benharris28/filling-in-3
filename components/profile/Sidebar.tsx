@@ -26,10 +26,11 @@ import { NavButton } from './NavButton'
 import { UserProfile } from './UserProfile'
 
 interface SidebarProps {
-  onSelect?: (value: string) => void
+  onSelect?: (value: string) => void;
+  selectedNavButton: string | null;
 }
 
-export const Sidebar = (props: SidebarProps) => (
+export const Sidebar = ({ onSelect, selectedNavButton }: SidebarProps) => (
   <Flex as="section" minH="100vh" bg="bg-canvas">
     <Flex
       flex="1"
@@ -45,9 +46,9 @@ export const Sidebar = (props: SidebarProps) => (
           
          
           <Stack spacing="1">
-            <NavButton label="Home" icon={FiHome} onSelect={() => props.onSelect?.('Home')}/>
-            <NavButton label="Post Shift" icon={FiBarChart2} aria-current="page" onClick={() => props.onSelect?.('Post Shift')} />
-            <NavButton label="Applications" icon={FiCheckSquare} onClick={() => props.onSelect?.('Applications')} />
+            <NavButton label="Home" icon={FiHome} isSelected={selectedNavButton === 'Home'} onClick={() => onSelect?.('Home')} />
+            <NavButton label="Post Shift" icon={FiBarChart2} isSelected={selectedNavButton === 'Post Shift'} onClick={() => onSelect?.('Post Shift')} />
+            <NavButton label="Applications" icon={FiCheckSquare} isSelected={selectedNavButton === 'Applications'} onClick={() => onSelect?.('Applications')} />
             
           </Stack>
         </Stack>
