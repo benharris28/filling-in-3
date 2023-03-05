@@ -2,7 +2,11 @@ import { Box, Drawer, DrawerContent, DrawerOverlay, Flex, useDisclosure } from '
 import { Sidebar } from './Sidebar'
 import { ToggleButton } from './ToggleButton'
 
-export const Navbar = () => {
+interface NavbarProps {
+  onSelect?: (value: string) => void;
+  selectedNavButton: string | null;
+}
+export const Navbar = ({ onSelect, selectedNavButton }: NavbarProps) => {
   const { isOpen, onToggle, onClose } = useDisclosure()
   return (
     <Box width="full" py="4" px={{ base: '4', md: '8' }} bg="bg-surface" boxShadow="sm">
@@ -20,7 +24,7 @@ export const Navbar = () => {
         >
           <DrawerOverlay />
           <DrawerContent>
-            <Sidebar />
+            <Sidebar onSelect={onSelect} selectedNavButton={selectedNavButton} />
           </DrawerContent>
         </Drawer>
       </Flex>

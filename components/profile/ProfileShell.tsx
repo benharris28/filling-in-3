@@ -38,7 +38,7 @@ import {
         bg="bg-canvas"
         overflowY="auto"
       >
-        {isDesktop ? <Sidebar onSelect={setSelectedNavButton} selectedNavButton={selectedNavButton} /> : <Navbar />}
+        {isDesktop ? <Sidebar onSelect={setSelectedNavButton} selectedNavButton={selectedNavButton} /> : <Navbar onSelect={setSelectedNavButton} selectedNavButton={selectedNavButton}/>}
         <Box bg="bg-surface" pt={{ base: '0', lg: '3' }} flex="1">
           <Box bg="bg-canvas" borderTopLeftRadius={{ base: 'none', lg: '2rem' }} height="full">
             <Container py="8" height="full">
