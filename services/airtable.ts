@@ -33,3 +33,21 @@ export async function getShifts() {
 
   return shifts;
 }
+
+export async function addUserToTable(user_id: string, email: string) {
+  const base = new Airtable({
+    apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+  }).base("appHZw8p3zb6QrFz3");
+  // Insert a new record with the provided data
+  const records = await base("Users").create([
+    {
+      fields: {
+        user_id,
+        email
+      },
+    },
+  ]);
+
+  // Return the inserted record
+  return records[0];
+}
