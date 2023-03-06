@@ -17,9 +17,9 @@ import {
   
   export default function Navbar() {
     const isDesktop = useBreakpointValue({ base: false, lg: true })
-    const { onToggle, isOpen } = useDisclosure({ defaultIsOpen: true })
+    const { onToggle, isOpen } = useDisclosure({ defaultIsOpen: false })
     return (
-      <Box as="section" minH="md">
+      <Box as="section">
         <Box as="nav" bg="bg-surface">
           <Container py={{ base: '4', lg: '5' }}>
             <HStack spacing="10" justify="space-between">

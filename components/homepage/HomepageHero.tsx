@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Badge, Box, Button, Container, Heading, Img, Stack, Text } from '@chakra-ui/react'
 
 export default function HomepageHero() { 
@@ -24,9 +25,11 @@ export default function HomepageHero() {
               </Stack>
             </Stack>
             <Stack direction={{ base: 'column', md: 'row' }} spacing="3">
-              <Button colorScheme='pink' size={{ base: 'lg', md: 'xl' }}>
-                Find A Shift
-              </Button>
+            <Link href="/shifts">
+  <Button colorScheme='pink' size={{ base: 'lg', md: 'xl' }}>
+    Find A Shift
+  </Button>
+</Link>
               <Button variant="secondary" size={{ base: 'lg', md: 'xl' }}>
                 Learn more
               </Button>
