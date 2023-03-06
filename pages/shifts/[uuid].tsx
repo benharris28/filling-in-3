@@ -27,7 +27,7 @@ export default function ShiftPage({ shift }: ShiftProps) {
     const router = useRouter();
 
     if (router.isFallback) {
-        return <div>Loading...</div>;
+        return <div>Loading....</div>;
       }
 
     console.log(shift)
