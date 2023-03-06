@@ -20,7 +20,7 @@ export default function HomepageHero() {
               <Stack spacing={{ base: '4', md: '6' }} maxW={{ md: 'xl', lg: 'md', xl: 'xl' }}>
                 <Heading size={{ base: 'md', md: 'xl' }}>Find a dental shift fast</Heading>
                 <Text fontSize={{ base: 'lg', md: 'xl' }} color="muted">
-                  Find a shift in your area using our app
+                  Find a shift in your area using our useful app
                 </Text>
               </Stack>
             </Stack>
