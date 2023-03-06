@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Navbar from '@/components/navigation/Navbar'
+import HomepageHero from '@/components/homepage/HomepageHero'
 
 import {
   Box,
@@ -20,7 +21,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      Hello
+      <HomepageHero />
+      
      
     </Box>
 

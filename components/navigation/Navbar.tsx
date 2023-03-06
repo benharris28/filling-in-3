@@ -53,7 +53,9 @@ import {
           </Container>
           <Divider />
         </Box>
+        {isOpen &&
         <ResourcesSubmenu isOpen={isDesktop && isOpen} />
+  }
       </Box>
     )
   }
