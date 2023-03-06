@@ -1,14 +1,32 @@
 import { Box, Button, Container, Heading, HStack, Icon, Stack, Text } from '@chakra-ui/react'
 import { FiBriefcase, FiDollarSign, FiMapPin } from 'react-icons/fi'
 
-export default function PageHeader() {
+interface Shift {
+  uuid: string;
+  shift_title: string;
+  position: string;
+  clinic_name: string;
+  skills_required: string[];
+  city: string;
+  start_date: string;
+  hours: number;
+  total_pay: number;
+  shift_overview: string;
+  requirements: string;
+}
+
+interface ShiftProps {
+  shift: Shift;
+}
+
+export default function PageHeader({ shift }: ShiftProps) {
     return (
   <Box as="section" bg="gray.50" pt={{ base: '4', md: '8' }} pb={{ base: '12', md: '24' }}>
     <Container>
       <Stack spacing="4" direction={{ base: 'column', md: 'row' }} justify="space-between">
         <Stack spacing="1">
           <Heading size={{ base: 'xs', md: 'sm' }} fontWeight="medium">
-            Christoph Winston
+            {shift.shift_title}
           </Heading>
           <Stack
             direction={{ base: 'column', sm: 'row' }}
@@ -17,15 +35,15 @@ export default function PageHeader() {
           >
             <HStack>
               <Icon as={FiBriefcase} boxSize={{ base: '4', sm: '5' }} />
-              <Text>Software Engineer</Text>
+              <Text>{shift.position}</Text>
             </HStack>
             <HStack>
               <Icon as={FiMapPin} boxSize={{ base: '4', sm: '5' }} />
-              <Text>Berlin, Germany</Text>
+              <Text>{shift.city}</Text>
             </HStack>
             <HStack>
               <Icon as={FiDollarSign} boxSize={{ base: '4', sm: '5' }} />
-              <Text>80.000 - 90.000</Text>
+              <Text>{shift.total_pay}</Text>
             </HStack>
           </Stack>
         </Stack>

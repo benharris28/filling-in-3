@@ -1,6 +1,24 @@
 import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react'
 
-export default function CallToAction() {
+interface Shift {
+  uuid: string;
+  shift_title: string;
+  position: string;
+  clinic_name: string;
+  skills_required: string[];
+  city: string;
+  start_date: string;
+  hours: number;
+  total_pay: number;
+  shift_overview: string;
+  requirements: string;
+}
+
+interface ShiftProps {
+  shift: Shift;
+}
+
+export default function CallToAction({shift} : ShiftProps) {
     return (
   <Container py={{ base: '16', md: '24' }}>
     <Box
