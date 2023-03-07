@@ -30,10 +30,9 @@ export default function CallToAction({shift} : ShiftProps) {
     >
       <Stack spacing="8" direction={{ base: 'column', lg: 'row' }} justify="space-between">
         <Stack spacing="4" maxW="2xl">
-          <Heading size="sm">Ready to Grow?</Heading>
+          <Heading size="sm">Ready to Apply?</Heading>
           <Text color="muted" fontSize={{ base: 'lg', lg: 'xl' }}>
-            With this beautiful and responsive React components you will realize your next project
-            in no time.
+            Sign up for this shift with a few clicks
           </Text>
         </Stack>
         <Stack spacing="3" direction={{ base: 'column', sm: 'row' }} justify={{ base: 'start' }}>

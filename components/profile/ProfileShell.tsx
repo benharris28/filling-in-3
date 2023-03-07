@@ -51,14 +51,12 @@ import {
                 >
                   <Stack spacing="1">
                     <Heading size={{ base: 'xs', lg: 'sm' }} fontWeight="medium">
-                      Dashboard
+                      {selectedNavButton}
                     </Heading>
                     <Text color="muted">All your profile info at a glance</Text>
                   </Stack>
                   <HStack spacing="3">
-                    <Button variant="secondary" leftIcon={<FiDownloadCloud fontSize="1.25rem" />}>
-                      Download
-                    </Button>
+                   
                     <Button variant="primary">Create</Button>
                   </HStack>
                 </Stack>

@@ -60,9 +60,14 @@ import {
               onChange={(selectedOptions) => handleFilterChange("cities", selectedOptions)} 
               selectedOptions={filters.cities}
               />
+              <CheckboxFilter 
+              options={skillsFilter.options} 
+              label="Skills" 
+              onChange={(selectedOptions) => handleFilterChange("skills", selectedOptions)} 
+              selectedOptions={filters.skills}
+              />
             <MobilePriceFilter />
-            <MobileSizeFilter />
-            <MobileColorFilter />
+          
           </Stack>
         </FilterDrawer>
       </>

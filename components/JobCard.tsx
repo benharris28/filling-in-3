@@ -39,12 +39,13 @@ function JobCard({
 }: JobCardProps) {
   return (
     <Box as="section" py={{ base: "0", md: "0" }}>
-      <Container maxW="3xl">
+      <Container maxW='3xl' px='0'>
         <Box
           bg="bg-surface"
           boxShadow="sm"
           borderRadius="lg"
           p={{ base: "4", md: "4" }}
+  
         >
           <Stack spacing="2">
             <Stack spacing="1">

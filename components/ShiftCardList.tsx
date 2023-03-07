@@ -48,7 +48,7 @@ export default function ShiftCardList({ shifts, filters }: JobsProps) {
 
   return (
     <Box p="4">
-      <SimpleGrid columns={[1]} spacing="2">
+      <SimpleGrid columns={[1]} spacing="2" overflow='scroll'>
         {filteredShifts.map((shift) => (
           <Link key={shift.uuid} href={`/shifts/${shift.uuid}`}>
             <JobCard
