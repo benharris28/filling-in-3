@@ -9,13 +9,16 @@ import {
     IconButton,
     useBreakpointValue,
     useDisclosure,
-    Text
+    Text,
+    Link
   } from '@chakra-ui/react'
   import { FiMenu } from 'react-icons/fi'
   import { PopoverIcon } from './PopoverIcon'
   import { ResourcesSubmenu } from './ResourcesSubmenu'
+  import { useUser } from '@auth0/nextjs-auth0/client';
   
   export default function Navbar() {
+    const { user } = useUser();
     const isDesktop = useBreakpointValue({ base: false, lg: true })
     const { onToggle, isOpen } = useDisclosure({ defaultIsOpen: false })
     return (
@@ -32,6 +35,12 @@ import {
                     
                     <Button>Support</Button>
                   </ButtonGroup>
+                  {user ? (
+                    <Link href='/api/auth/logout'>
+                      <Button colorScheme="pink" variant='outline'>Logout</Button>
+                    </Link>
+                    
+                  ) : 
                   <HStack spacing="3">
                     <Button colorScheme="pink" variant='outline'>Sign in</Button>
                     <Button
@@ -41,6 +50,7 @@ import {
                       Sign Up
                     </Button>
                   </HStack>
+  }
                 </Flex>
               ) : (
                 <IconButton

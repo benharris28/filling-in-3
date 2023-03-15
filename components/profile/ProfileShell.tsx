@@ -56,9 +56,9 @@ import {
                     <Text color="muted">All your profile info at a glance</Text>
                   </Stack>
                   <HStack spacing="3">
-                   
-                    <Button variant="primary">Create</Button>
-                  </HStack>
+                 
+                  <Button colorScheme='pink'>Post a Shift</Button>
+                </HStack>
                 </Stack>
                 <Box bg="bg-surface" borderRadius="lg" borderWidth="1px" height="full">
                   {renderSelectedComponent()} {/* render selected component */}
