@@ -91,3 +91,93 @@ export async function getShiftByUuid(uuid: string) {
 
   return shift;
 }
+
+export async function getShiftsForUser(userId: string) {
+  const base = new Airtable({
+    apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+  }).base("appHZw8p3zb6QrFz3");
+
+  const filterFormula = `AND({user_id} = '${userId}')`;
+
+  const records = await base("Shifts")
+    .select({
+      view: "Grid view",
+      filterByFormula: filterFormula,
+    })
+    .all();
+
+  const shifts = records.map((record) => ({
+    id: record.id,
+    uuid: record.get("uuid"),
+    shift_title: record.get("shift_title"),
+    position: record.get("position"),
+    clinic_name: record.get("clinic_name"),
+    skills_required: record.get("skills_required"),
+    city: record.get("city"),
+    start_date: record.get("start_date"),
+    hours: record.get("hours"),
+    total_pay: record.get("total_pay"),
+  }));
+
+  return shifts;
+}
+
+export async function getUserData(userId: string) {
+  const base = new Airtable({
+    apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+  }).base("appHZw8p3zb6QrFz3");
+
+  const filterFormula = `AND({user_id} = '${userId}')`;
+
+  const records = await base("Users")
+    .select({
+      view: "Grid view",
+      filterByFormula: filterFormula,
+      maxRecords: 1,
+    })
+    .all();
+
+  if (records.length === 0) {
+    return null;
+  }
+
+  const record = records[0];
+  const userData = {
+    id: record.id,
+    user_id: record.get("user_id"),
+    first_name: record.get("first_name"),
+    last_name: record.get("last_name"),
+    status: record.get("status"),
+    user_type: record.get("user_type"),
+  };
+
+  return userData;
+}
+
+export async function getApplicationsForUser(userId: string) {
+  const base = new Airtable({
+    apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+  }).base("appHZw8p3zb6QrFz3");
+
+  const filterFormula = `AND({applicant_id} = '${userId}')`;
+
+  const records = await base("Applications")
+    .select({
+      view: "Grid view",
+      filterByFormula: filterFormula,
+    })
+    .all();
+
+  const applications = records.map((record) => ({
+    id: record.id,
+    shift_uuid: record.get("shift_uuid"),
+    applicant_id: record.get("applicant_id"),
+    application_date: record.get("application_date"),
+    status: record.get("status"),
+  }));
+
+  return applications;
+}
+
+
+
