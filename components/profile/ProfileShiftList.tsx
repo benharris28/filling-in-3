@@ -1,4 +1,5 @@
-import { Box, SimpleGrid, Link } from "@chakra-ui/react";
+import { useRef, useLayoutEffect, useState } from 'react';
+import { Box, SimpleGrid, Link, useBreakpointValue } from "@chakra-ui/react";
 import JobCard from "../JobCard";
 import { UserData, Shift, Application, Auth0User } from '../../utils/types';
 
@@ -8,10 +9,19 @@ interface UserShiftListProps {
 
 
 export default function UserShiftList({ shifts }: UserShiftListProps) {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [boxHeight, setBoxHeight] = useState('300px');
     console.log(shifts)
+    
+
+   
+
   return (
-    <Box p="4">
-      <SimpleGrid columns={[1]} spacing="2" overflow='scroll'>
+    <Box p="4" position="relative" height='100%'>
+      <SimpleGrid columns={[1]} spacing="2" h="90%"
+        overflowY="scroll"
+        position="absolute"
+        w="100%">
       {shifts.length > 0 && shifts.map((shift) => (
           <Link key={shift.uuid} href={`/shifts/${shift.uuid}`}>
             <JobCard
