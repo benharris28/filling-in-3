@@ -30,10 +30,12 @@ interface ShiftProps {
 }
 
 export default function PageHeader({ shift }: ShiftProps) {
+  console.log(shift)
   const router = useRouter();
+  
 
   const handleBackButtonClick = () => {
-    router.push("/shifts");
+    router.back();
   };
 
   return (

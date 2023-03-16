@@ -25,6 +25,7 @@ interface ShiftProps {
 
 export default function ShiftPage({ shift }: ShiftProps) {
     const router = useRouter();
+    
 
     if (router.isFallback) {
         return <div>Loading....</div>;
@@ -65,6 +66,6 @@ export async function getStaticProps({ params }: Params) {
   
     return {
       paths,
-      fallback: false,
+      fallback: 'blocking',
     };
   }

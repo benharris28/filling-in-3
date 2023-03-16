@@ -33,13 +33,13 @@ import {
     
     const renderSelectedComponent = () => {
       switch (selectedNavButton) {
-        case 'Home':
+        case 'Shifts':
         return <ProfileShiftList shifts={shifts.length > 0 ? shifts : []} />
         case 'Post Shift':
           return <ShiftPostForm />;
         // add cases for other navbutton components as needed
         default:
-          return <Text>Test</Text>; // default to the "Test" text if no navbutton is selected
+          return <ProfileShiftList shifts={shifts.length > 0 ? shifts : []} />; // default to the "Test" text if no navbutton is selected
       }
     };
 

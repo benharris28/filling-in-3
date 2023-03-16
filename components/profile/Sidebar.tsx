@@ -56,9 +56,9 @@ export default function Sidebar({ onSelect, selectedNavButton }: SidebarProps) {
           
          
           <Stack spacing="1">
-            <NavButton label="Home" icon={FiHome} isSelected={selectedNavButton === 'Home'} onClick={() => onSelect?.('Home')} />
-            <NavButton label="Post Shift" icon={FiBarChart2} isSelected={selectedNavButton === 'Post Shift'} onClick={() => onSelect?.('Post Shift')} />
-            <NavButton label="Applications" icon={FiCheckSquare} isSelected={selectedNavButton === 'Applications'} onClick={() => onSelect?.('Applications')} />
+            <NavButton label="Shifts" icon={FiHome} isSelected={selectedNavButton === 'Shifts'} onClick={() => onSelect?.('Home')} />
+            <NavButton label="Applications" icon={FiBarChart2} isSelected={selectedNavButton === 'Applications'} onClick={() => onSelect?.('Post Shift')} />
+            <NavButton label="Credentials" icon={FiCheckSquare} isSelected={selectedNavButton === 'Credentials'} onClick={() => onSelect?.('Applications')} />
             
           </Stack>
         </Stack>

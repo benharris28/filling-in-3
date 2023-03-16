@@ -89,7 +89,7 @@ export async function getShiftByUuid(uuid: string) {
   requirements: record.get("requirements") || null
 }));
 
-  return shifts;
+  return shifts[0];
 }
 
 export async function getShiftsForUser(userId: string) {
