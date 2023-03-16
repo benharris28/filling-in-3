@@ -1,3 +1,5 @@
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { Auth0User } from '../../utils/types';
 import { Icon } from '@chakra-ui/icons'
 import {
   Box,
@@ -30,7 +32,15 @@ interface SidebarProps {
   selectedNavButton: string | null;
 }
 
-export const Sidebar = ({ onSelect, selectedNavButton }: SidebarProps) => (
+
+
+export default function Sidebar({ onSelect, selectedNavButton }: SidebarProps) {
+  const { user, isLoading } = useUser() as { user: Auth0User | undefined; isLoading: boolean };
+  
+  return (
+  <>
+  {isLoading && <Box>Loading...</Box>}
+  {user && 
   <Flex as="section" minH="100vh" bg="bg-canvas">
     <Flex
       flex="1"
@@ -80,12 +90,15 @@ export const Sidebar = ({ onSelect, selectedNavButton }: SidebarProps) => (
           </Box>
           <Divider />
           <UserProfile
-            name="Christoph Winston"
-            image="https://tinyurl.com/yhkm2ek8"
-            email="chris@chakra-ui.com"
+            name={user.given_name}
+            image={user.picture}
+            email={user.email}
           />
         </Stack>
       </Stack>
     </Flex>
   </Flex>
+  }
+  </>
 )
+}

@@ -12,12 +12,17 @@ import {
   } from '@chakra-ui/react'
   import { FiDownloadCloud } from 'react-icons/fi'
   import { Navbar } from './Navbar'
-  import { Sidebar } from './Sidebar'
+  import Sidebar from './Sidebar'
   import { ShiftPostForm } from '../shiftpostform/ShiftPostForm'
-  import { UserData, Shift, Application } from '../../utils/types';
+  import ProfileShiftList from './ProfileShiftList'
+  import { UserData, Shift, Application, Auth0User } from '../../utils/types';
   
   interface ShiftProps {
     shifts: Shift[];
+  }
+
+  interface UserProps {
+    user: Auth0User
   }
 
   export default function ProfileShell({ shifts }: ShiftProps) {
@@ -28,6 +33,8 @@ import {
     
     const renderSelectedComponent = () => {
       switch (selectedNavButton) {
+        case 'Home':
+        return <ProfileShiftList shifts={shifts.length > 0 ? shifts : []} />
         case 'Post Shift':
           return <ShiftPostForm />;
         // add cases for other navbutton components as needed

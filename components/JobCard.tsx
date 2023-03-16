@@ -13,16 +13,16 @@ import {
 import { GoCalendar, GoGlobe, GoClock, GoPerson } from "react-icons/go";
 
 type JobCardProps = {
-  id: string;
-  uuid?: string;
-  shift_title: string;
-  position: string;
-  clinic_name: string;
-  skills_required: string[];
-  city: string;
-  start_date: string;
-  hours: number;
-  total_pay: number;
+  id: string | null;
+  uuid?: string | null;
+  shift_title: string | null;
+  position: string | null;
+  clinic_name: string | null;
+  skills_required: string[] | null;
+  city: string | null
+  start_date: string | null;
+  hours: number | null;
+  total_pay: number | null;
 };
 
 function JobCard({
@@ -82,7 +82,7 @@ function JobCard({
             </Stack>
 
             <Wrap shouldWrapChildren>
-              {skills_required.map((skill) => (
+              {skills_required && skills_required.map((skill) => (
                 <Tag bg='pink.100' key={skill}>{skill}</Tag>
               ))}
             </Wrap>

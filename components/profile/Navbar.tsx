@@ -1,5 +1,5 @@
 import { Box, Drawer, DrawerContent, DrawerOverlay, Flex, useDisclosure } from '@chakra-ui/react'
-import { Sidebar } from './Sidebar'
+import Sidebar from './Sidebar'
 import { ToggleButton } from './ToggleButton'
 
 interface NavbarProps {

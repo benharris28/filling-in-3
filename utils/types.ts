@@ -6,6 +6,8 @@ export interface UserData {
     user_type: string;
   }
 
+
+
   export interface Shift {
     id: string;
     uuid: string | null;
@@ -28,3 +30,17 @@ export interface UserData {
     application_date: string;
     status: string;
   }
+
+  export interface Auth0User {
+    email: string;
+    email_verified: boolean;
+    family_name: string;
+    given_name: string;
+    locale: string;
+    name: string;
+    nickname: string;
+    picture: string;
+    sid: string;
+    sub: string;
+    updated_at: string;
+  };
