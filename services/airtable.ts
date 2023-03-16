@@ -74,22 +74,22 @@ export async function getShiftByUuid(uuid: string) {
 
   // Map the record to a simplified shift object
   const record = records[0];
-  const shift = {
-    id: record.id,
-    uuid: record.get('uuid'),
-    shift_title: record.get('shift_title'),
-    position: record.get('position'),
-    clinic_name: record.get('clinic_name'),
-    skills_required: record.get('skills_required'),
-    city: record.get('city'),
-    start_date: record.get('start_date'),
-    hours: record.get('hours'),
-    total_pay: record.get('total_pay'),
-    shift_overview: record.get('shift_overview'),
-    requirements: record.get('requirements')
-  };
+  const shifts = records.map((record) => ({
+  id: record.id,
+  uuid: record.get("uuid") || null,
+  shift_title: record.get("shift_title") || null,
+  position: record.get("position") || null,
+  clinic_name: record.get("clinic_name") || null,
+  skills_required: record.get("skills_required") || null,
+  city: record.get("city") || null,
+  start_date: record.get("start_date") || null,
+  hours: record.get("hours") || null,
+  total_pay: record.get("total_pay") || null,
+  shift_overview: record.get("shift_overview") || null,
+  requirements: record.get("requirements") || null
+}));
 
-  return shift;
+  return shifts;
 }
 
 export async function getShiftsForUser(userId: string) {
@@ -106,18 +106,24 @@ export async function getShiftsForUser(userId: string) {
     })
     .all();
 
-  const shifts = records.map((record) => ({
-    id: record.id,
-    uuid: record.get("uuid"),
-    shift_title: record.get("shift_title"),
-    position: record.get("position"),
-    clinic_name: record.get("clinic_name"),
-    skills_required: record.get("skills_required"),
-    city: record.get("city"),
-    start_date: record.get("start_date"),
-    hours: record.get("hours"),
-    total_pay: record.get("total_pay"),
-  }));
+    if (records.length === 0) {
+      return [{}];
+    }
+
+    const shifts = records.map((record) => ({
+      id: record.id,
+      uuid: record.get("uuid") || null,
+      shift_title: record.get("shift_title") || null,
+      position: record.get("position") || null,
+      clinic_name: record.get("clinic_name") || null,
+      skills_required: record.get("skills_required") || null,
+      city: record.get("city") || null,
+      start_date: record.get("start_date") || null,
+      hours: record.get("hours") || null,
+      total_pay: record.get("total_pay") || null,
+      shift_overview: record.get("shift_overview") || null,
+      requirements: record.get("requirements") || null
+    }));
 
   return shifts;
 }

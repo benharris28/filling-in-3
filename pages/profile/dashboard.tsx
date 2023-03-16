@@ -6,6 +6,8 @@ import ProfileShell from '../../components/profile/ProfileShell';
 import { getShiftsForUser, getApplicationsForUser, getUserData } from '../../services/airtable';
 import { UserData, Shift, Application } from '../../utils/types';
 
+
+
 export default function Dashboard() {
   const { user, isLoading } = useUser();
   const router = useRouter();
@@ -17,19 +19,27 @@ export default function Dashboard() {
   console.log('User.sub:', user?.sub);
 
   useEffect(() => {
-    if (user && user.sub) {
+    const userId = user?.sub;
+
+    if (userId) {
       const fetchData = async () => {
-        const fetchedShifts = await getShiftsForUser(user?.sub);
-        const fetchedApplications = await getApplicationsForUser(user.sub);
-        const fetchedUserData = await getUserData(user.sub);
-        setShifts(fetchedShifts);
-        setApplications(fetchedApplications);
-        setUserData(fetchedUserData);
+        console.log(userId)
+        const fetchedShifts = await getShiftsForUser(userId) as Shift[];;
+        const fetchedApplications = await getApplicationsForUser(userId);
+        const fetchedUserData = await getUserData(userId);
+        
+        console.log(fetchedShifts)
+    
+        if (fetchedShifts.length === 0 || (fetchedShifts.length > 0 && !fetchedShifts[0].hasOwnProperty("uuid"))) {
+          setShifts([]);
+        } else {
+          setShifts(fetchedShifts);
+        }
       };
 
       fetchData();
     }
-  }, [user]);
+  }, [user, isLoading]);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -38,5 +48,5 @@ export default function Dashboard() {
     return null;
   }
 
-  return <ProfileShell userData={userData} shifts={shifts} applications={applications} />;
+  return <ProfileShell shifts={shifts} />;
 }

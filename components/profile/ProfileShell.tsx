@@ -14,8 +14,14 @@ import {
   import { Navbar } from './Navbar'
   import { Sidebar } from './Sidebar'
   import { ShiftPostForm } from '../shiftpostform/ShiftPostForm'
+  import { UserData, Shift, Application } from '../../utils/types';
   
-  export default function ProfileShell() {
+  interface ShiftProps {
+    shifts: Shift[];
+  }
+
+  export default function ProfileShell({ shifts }: ShiftProps) {
+    console.log(shifts)
     const isDesktop = useBreakpointValue({ base: false, lg: true })
     const [selectedNavButton, setSelectedNavButton] = useState<string | null>(null); // track currently selected navbutton
     console.log(selectedNavButton)

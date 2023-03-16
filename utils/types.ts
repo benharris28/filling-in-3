@@ -1,5 +1,4 @@
 export interface UserData {
-    id: string;
     user_id: string;
     first_name: string;
     last_name: string;
@@ -8,18 +7,19 @@ export interface UserData {
   }
 
   export interface Shift {
-    uuid: string;
-    shift_title: string;
-    position: string;
-    clinic_name: string;
-    skills_required: string[];
-    city: string;
-    start_date: string;
-    hours: number;
-    total_pay: number;
-    shift_overview: string;
-    requirements: string;
-  }
+    id: string;
+    uuid: string | null;
+    shift_title: string | null;
+    position: string | null;
+    clinic_name: string | null;
+    skills_required: string[] | null;
+    city: string | null;
+    start_date: string | null;
+    hours: number | null;
+    total_pay: number | null;
+    shift_overview: string | null;
+    requirements: string | null;
+  };
   
   export interface Application {
     id: string;
