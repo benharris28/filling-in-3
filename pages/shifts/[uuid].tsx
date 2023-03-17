@@ -3,6 +3,7 @@ import { getShiftByUuid, getShifts } from '@/services/airtable';
 import PageHeader from "@/components/shiftpage/PageHeader"
 import ShiftPageBody from "@/components/shiftpage/ShiftPageBody"
 import CallToAction from "@/components/shiftpage/CallToAction"
+import Navbar from '@/components/navigation/Navbar'
 
 //Pull data in here
 interface Shift {
@@ -35,6 +36,7 @@ export default function ShiftPage({ shift }: ShiftProps) {
 
     return (
         <div>
+            <Navbar />
             <PageHeader shift={shift} />
             <ShiftPageBody shift={shift} />
             <CallToAction shift={shift} />

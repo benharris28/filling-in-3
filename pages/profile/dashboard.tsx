@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import ProfileShell from '../../components/profile/ProfileShell';
 import { getShiftsForUser, getApplicationsForUser, getUserData } from '../../services/airtable';
 import { UserData, Shift, Application } from '../../utils/types';
+import Navbar from '@/components/navigation/Navbar'
 
 
 
@@ -48,5 +49,11 @@ export default function Dashboard() {
     return null;
   }
 
-  return <ProfileShell shifts={shifts} />;
+  return (
+    <>
+      <Navbar />
+      <ProfileShell shifts={shifts} />
+    </>
+    
+  );
 }

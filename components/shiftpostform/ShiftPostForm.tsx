@@ -11,7 +11,7 @@ import {
   } from '@chakra-ui/react'
   
   export const ShiftPostForm = (props: BoxProps) => (
-    <Box as="form" bg="bg-surface"  {...props}>
+    <Box as="form" margin='auto' w='100%' maxW={{ base: '100%', md: 'xl'}}bg="bg-surface"  {...props}>
       <Stack spacing="5" px={{ base: '4', md: '6' }} py={{ base: '5', md: '6' }}>
         <Stack spacing="6" direction={{ base: 'column', md: 'row' }}>
           <FormControl id="firstName">
@@ -27,6 +27,17 @@ import {
           <FormLabel>Street</FormLabel>
           <Input defaultValue="Am Kreuzberg 3" />
         </FormControl>
+        <Stack spacing="6" direction={{ base: 'column', md: 'row' }}>
+          <FormControl id="city">
+            <FormLabel>City</FormLabel>
+            <Input defaultValue="Berlin" />
+          </FormControl>
+          <FormControl id="state">
+            <FormLabel>State / Province</FormLabel>
+            <Input />
+          </FormControl>
+        
+        </Stack>
         <Stack spacing="6" direction={{ base: 'column', md: 'row' }}>
           <FormControl id="city">
             <FormLabel>City</FormLabel>
