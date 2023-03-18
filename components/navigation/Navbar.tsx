@@ -23,7 +23,7 @@ import {
     const { onToggle, isOpen } = useDisclosure({ defaultIsOpen: false })
     return (
       <Box as="section">
-        <Box as="nav" bg="bg-surface">
+        <Box as="nav" bg="bg-canvas">
           <Container py={{ base: '4', lg: '5' }}>
             <HStack spacing="10" justify="space-between">
               <Text>Filling In</Text>

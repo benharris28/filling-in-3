@@ -7,8 +7,8 @@ export default function PostShift() {
     return (
         <>
         <Navbar />
-        <Container>
-            <Stack display='flex' justifyContent='center' alignItems='center'>
+        <Container bgColor='white'>
+            <Stack display='flex' justifyContent='center' alignItems='center' bgColor='white'>
                 <PageHeaderCentered />
                 <ShiftPostForm />
             </Stack>
