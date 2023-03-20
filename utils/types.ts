@@ -1,3 +1,4 @@
+
 export interface UserData {
     user_id: string;
     first_name: string;
@@ -6,10 +7,24 @@ export interface UserData {
     user_type: string;
   }
 
+  export interface UploadShift {
+    user_id: string;
+    uuid: string;
+    shift_title: string;
+    position: string;
+    clinic_name: string;
+    skills_required: string[];
+    city: string;
+    start_date: string;
+    hours: number;
+    total_pay: number;
+    shift_overview: string;
+  };
 
 
   export interface Shift {
     id: string;
+    user_id: string;
     uuid: string | null;
     shift_title: string | null;
     position: string | null;

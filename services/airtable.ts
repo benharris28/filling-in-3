@@ -1,4 +1,9 @@
 import Airtable from "airtable";
+import { UploadShift } from "../utils/types";
+
+interface ShiftProps {
+  shift: UploadShift;
+}
 
 export async function getShifts() {
   // Initialize the Airtable client with the API key
@@ -25,11 +30,10 @@ export async function getShifts() {
     city: record.get("city"),
     start_date: record.get("start_date"),
     hours: record.get("hours"),
-    total_pay: record.get("total_pay")
+    total_pay: record.get("total_pay"),
   }));
 
-  console.log(shifts)
-  
+  console.log(shifts);
 
   return shifts;
 }
@@ -43,7 +47,7 @@ export async function addUserToTable(user_id: string, email: string) {
     {
       fields: {
         user_id,
-        email
+        email,
       },
     },
   ]);
@@ -51,6 +55,47 @@ export async function addUserToTable(user_id: string, email: string) {
   // Return the inserted record
   return records[0];
 }
+
+export async function addShiftToTable({ shift }: ShiftProps) {
+  const base = new Airtable({
+    apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+  }).base("appHZw8p3zb6QrFz3");
+  // Insert a new record with the provided data
+  const records = await base("Shifts").create([
+    {
+      fields: {
+        uuid: shift.uuid,
+        user_id: shift.user_id,
+        shift_title: shift.shift_title,
+        position: shift.position,
+        clinic_name: shift.clinic_name,
+        skills_required: shift.skills_required,
+        city: shift.city,
+        start_date: shift.start_date,
+        hours: shift.hours,
+        total_pay: shift.total_pay,
+        shift_overview: shift.shift_overview,
+      },
+    }
+    
+   
+  ],
+  function(err, records) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    if (records) {
+    records.forEach(function (record) {
+      console.log(record.getId());
+    
+    });
+  }
+});
+}
+
+  // Return the inserted record
+  
 
 
 export async function getShiftByUuid(uuid: string) {
@@ -60,7 +105,7 @@ export async function getShiftByUuid(uuid: string) {
   }).base("appHZw8p3zb6QrFz3");
 
   // Select the shift record with the specified UUID
-  const records = await base('Shifts')
+  const records = await base("Shifts")
     .select({
       filterByFormula: `{uuid} = '${uuid}'`,
       maxRecords: 1,
@@ -75,19 +120,19 @@ export async function getShiftByUuid(uuid: string) {
   // Map the record to a simplified shift object
   const record = records[0];
   const shifts = records.map((record) => ({
-  id: record.id,
-  uuid: record.get("uuid") || null,
-  shift_title: record.get("shift_title") || null,
-  position: record.get("position") || null,
-  clinic_name: record.get("clinic_name") || null,
-  skills_required: record.get("skills_required") || null,
-  city: record.get("city") || null,
-  start_date: record.get("start_date") || null,
-  hours: record.get("hours") || null,
-  total_pay: record.get("total_pay") || null,
-  shift_overview: record.get("shift_overview") || null,
-  requirements: record.get("requirements") || null
-}));
+    id: record.id,
+    uuid: record.get("uuid") || null,
+    shift_title: record.get("shift_title") || null,
+    position: record.get("position") || null,
+    clinic_name: record.get("clinic_name") || null,
+    skills_required: record.get("skills_required") || null,
+    city: record.get("city") || null,
+    start_date: record.get("start_date") || null,
+    hours: record.get("hours") || null,
+    total_pay: record.get("total_pay") || null,
+    shift_overview: record.get("shift_overview") || null,
+    requirements: record.get("requirements") || null,
+  }));
 
   return shifts[0];
 }
@@ -106,24 +151,24 @@ export async function getShiftsForUser(userId: string) {
     })
     .all();
 
-    if (records.length === 0) {
-      return [{}];
-    }
+  if (records.length === 0) {
+    return [{}];
+  }
 
-    const shifts = records.map((record) => ({
-      id: record.id,
-      uuid: record.get("uuid") || null,
-      shift_title: record.get("shift_title") || null,
-      position: record.get("position") || null,
-      clinic_name: record.get("clinic_name") || null,
-      skills_required: record.get("skills_required") || null,
-      city: record.get("city") || null,
-      start_date: record.get("start_date") || null,
-      hours: record.get("hours") || null,
-      total_pay: record.get("total_pay") || null,
-      shift_overview: record.get("shift_overview") || null,
-      requirements: record.get("requirements") || null
-    }));
+  const shifts = records.map((record) => ({
+    id: record.id,
+    uuid: record.get("uuid") || null,
+    shift_title: record.get("shift_title") || null,
+    position: record.get("position") || null,
+    clinic_name: record.get("clinic_name") || null,
+    skills_required: record.get("skills_required") || null,
+    city: record.get("city") || null,
+    start_date: record.get("start_date") || null,
+    hours: record.get("hours") || null,
+    total_pay: record.get("total_pay") || null,
+    shift_overview: record.get("shift_overview") || null,
+    requirements: record.get("requirements") || null,
+  }));
 
   return shifts;
 }
@@ -184,6 +229,3 @@ export async function getApplicationsForUser(userId: string) {
 
   return applications;
 }
-
-
-
