@@ -1,6 +1,6 @@
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { Auth0User } from '../../utils/types';
-import { v4 } from 'uuid';
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { Auth0User } from "../../utils/types";
+import { v4 } from "uuid";
 import {
   Box,
   BoxProps,
@@ -15,15 +15,22 @@ import {
   CheckboxGroup,
   Checkbox,
   FormErrorMessage,
-  FormHelperText
+  FormHelperText,
+  InputGroup,
+  InputLeftAddon,
 } from "@chakra-ui/react";
 import ReactSelect from "react-select";
+import OptionTypeBase from "react-select";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { skills, positions, experiences } from "./ShiftFormData";
+import { skills, positions, experiences, hours } from "./ShiftFormData";
 import { addShiftToTable } from "../../services/airtable";
 
-const { user, isLoading } = useUser() as { user: Auth0User | undefined; isLoading: boolean };
+type SkillOption = {
+  value: string;
+  label: string;
+};
 
 const validationSchema = Yup.object().shape({
   clinic_name: Yup.string().required("Clinic Name is required"),
@@ -44,6 +51,12 @@ interface ShiftPostFormProps extends BoxProps {}
 //Submit form to Airtable
 
 export const ShiftPostForm = ({ ...props }: ShiftPostFormProps) => {
+  
+  const { user, isLoading } = useUser() as {
+    user: Auth0User | undefined;
+    isLoading: boolean;
+  };
+
   const customStyles = {
     control: (provided: any, state: any) => ({
       ...provided,
@@ -87,11 +100,13 @@ export const ShiftPostForm = ({ ...props }: ShiftPostFormProps) => {
     },
     validationSchema,
     onSubmit: async (values) => {
+      alert("Submitting");
+      console.log("Form values:", values);
       if (!user) {
         console.error("User is undefined");
         return; // Stop executing the function if the user is undefined
       }
-      
+
       const uuid = v4();
       const shift = {
         uuid,
@@ -109,152 +124,193 @@ export const ShiftPostForm = ({ ...props }: ShiftPostFormProps) => {
     },
   });
 
-  
-
-  console.log(skills);
   return (
-    <Box
-      as="form"
-      margin="auto"
-      w="100%"
-      maxW={{ base: "100%", md: "xl" }}
-      {...props}
-    >
-      <Stack
-        spacing="5"
-        px={{ base: "4", md: "6" }}
-        py={{ base: "5", md: "6" }}
-      >
-        <FormControl
-          id="clinic_name"
-          isInvalid={!!formik.errors.clinic_name && formik.touched.clinic_name}
+    <Box margin="auto" w="100%" maxW={{ base: "100%", md: "xl" }} {...props}>
+      <form onSubmit={formik.handleSubmit}>
+        <Stack
+          spacing="5"
+          px={{ base: "4", md: "6" }}
+          py={{ base: "5", md: "6" }}
         >
-          <FormLabel>Clinic Name</FormLabel>
-          <Input {...formik.getFieldProps("clinicName")} />
-          <FormErrorMessage>{formik.errors.clinic_name}</FormErrorMessage>
-        </FormControl>
-        <Stack spacing="6" direction={{ base: "column", md: "row" }}>
           <FormControl
-            id="city"
-            isInvalid={!!formik.errors.city && formik.touched.city}
-          >
-            <FormLabel>Clinic City</FormLabel>
-            <Input {...formik.getFieldProps("city")} />
-            <FormErrorMessage>{formik.errors.city}</FormErrorMessage>
-          </FormControl>
-          <FormControl
-            id="shift_title"
-            isInvalid={!!formik.errors.shift_title && formik.touched.shift_title}
-          >
-            <FormLabel>Shift Title</FormLabel>
-            <Input {...formik.getFieldProps("shift_title")} />
-            <FormErrorMessage>{formik.errors.shift_title}</FormErrorMessage>
-          </FormControl>
-        </Stack>
-        <Stack spacing="6" direction={{ base: "column", md: "row" }}>
-          <FormControl
-            id="skills_required"
+            id="clinic_name"
             isInvalid={
-              !!(formik.errors.skills_required && formik.touched.skills_required)
+              !!formik.errors.clinic_name && formik.touched.clinic_name
             }
           >
-            <FormLabel>Skills Required</FormLabel>
-            <ReactSelect
-              {...formik.getFieldProps("skills_required")}
-              options={skills}
-              isMulti
-              onChange={(selectedOptions) => {
-                formik.setFieldValue("skills_required", selectedOptions);
+            <FormLabel>Clinic Name</FormLabel>
+            <Input {...formik.getFieldProps("clinic_name")} />
+            <FormErrorMessage>{formik.errors.clinic_name}</FormErrorMessage>
+          </FormControl>
+          <Stack spacing="6" direction={{ base: "column", md: "row" }}>
+            <FormControl
+              id="city"
+              isInvalid={!!formik.errors.city && formik.touched.city}
+            >
+              <FormLabel>Clinic City</FormLabel>
+              <Input {...formik.getFieldProps("city")} />
+              <FormErrorMessage>{formik.errors.city}</FormErrorMessage>
+            </FormControl>
+            <FormControl
+              id="shift_title"
+              isInvalid={
+                !!formik.errors.shift_title && formik.touched.shift_title
+              }
+            >
+              <FormLabel>Shift Title</FormLabel>
+              <Input {...formik.getFieldProps("shift_title")} />
+              <FormErrorMessage>{formik.errors.shift_title}</FormErrorMessage>
+            </FormControl>
+            <FormControl
+  id="shift_overview"
+  isInvalid={!!formik.errors.shift_overview && formik.touched.shift_overview}
+>
+  <FormLabel>Shift Overview</FormLabel>
+  <Input {...formik.getFieldProps("shift_overview")} />
+  <FormErrorMessage>{formik.errors.shift_overview}</FormErrorMessage>
+</FormControl>
+          </Stack>
+          <Stack spacing="6" direction={{ base: "column", md: "row" }}>
+            <FormControl
+              id="skills_required"
+              isInvalid={
+                !!(
+                  formik.errors.skills_required &&
+                  formik.touched.skills_required
+                )
+              }
+            >
+              <FormLabel>Skills Required</FormLabel>
+              <ReactSelect<SkillOption, true>
+                value={formik.values.skills_required.map((skill) => ({
+                  value: skill,
+                  label:
+                    skills.find((option) => option.value === skill)?.label ||
+                    "",
+                }))}
+                options={skills}
+                isMulti
+                onChange={(
+                  selectedOptions: ReadonlyArray<SkillOption> | null
+                ) => {
+                  formik.setFieldValue(
+                    "skills_required",
+                    selectedOptions
+                      ? selectedOptions.map((option) => option.value)
+                      : []
+                  );
+                }}
+                onBlur={() => {
+                  formik.setFieldTouched("skills_required", true);
+                }}
+                styles={customStyles}
+              />
+              <FormErrorMessage>
+                {formik.errors.skills_required}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl
+              id="position"
+              isInvalid={!!formik.errors.position && formik.touched.position}
+            >
+              <FormLabel>Position</FormLabel>
+              <Select {...formik.getFieldProps("position")}>
+                {positions.map((position) => (
+                  <option key={position.value} value={position.value}>
+                    {position.label}
+                  </option>
+                ))}
+              </Select>
+              <FormErrorMessage>{formik.errors.position}</FormErrorMessage>
+            </FormControl>
+          </Stack>
+          <Stack spacing="6" direction={{ base: "column", md: "row" }}>
+            <FormControl
+              id="experience"
+              isInvalid={
+                !!formik.errors.experience && formik.touched.experience
+              }
+            >
+              <FormLabel>Experience Required</FormLabel>
+              <Select {...formik.getFieldProps("experience")}>
+                {experiences.map((experience) => (
+                  <option key={experience.value} value={experience.value}>
+                    {experience.label}
+                  </option>
+                ))}
+              </Select>
+              <FormErrorMessage>{formik.errors.experience}</FormErrorMessage>
+            </FormControl>
+            <FormControl
+              id="start_date"
+              isInvalid={
+                !!formik.errors.start_date && formik.touched.start_date
+              }
+            >
+              <FormLabel>Start Date</FormLabel>
+              <Input type="date" {...formik.getFieldProps("start_date")} />
+              <FormErrorMessage>{formik.errors.start_date}</FormErrorMessage>
+            </FormControl>
+          </Stack>
+          <Stack spacing="6" direction={{ base: "column", md: "row" }}>
+            <FormControl
+              id="start_time"
+              isInvalid={
+                !!formik.errors.start_time && formik.touched.start_time
+              }
+            >
+              <FormLabel>Start Time</FormLabel>
+              <Input type="time" {...formik.getFieldProps("start_time")} />
+              <FormErrorMessage>{formik.errors.start_time}</FormErrorMessage>
+            </FormControl>
+            <FormControl
+              id="shift_hours"
+              isInvalid={
+                !!formik.errors.shift_hours && formik.touched.shift_hours
+              }
+            >
+              <FormLabel>Hours</FormLabel>
+              <Select {...formik.getFieldProps("shift_hours")}>
+                {hours.map((hour) => (
+                  <option key={hour.value} value={hour.value}>
+                    {hour.label}
+                  </option>
+                ))}
+              </Select>
+              <FormErrorMessage>{formik.errors.shift_hours}</FormErrorMessage>
+            </FormControl>
+          </Stack>
+          <Stack spacing="6" direction={{ base: "column", md: "row" }}>
+            <FormControl
+              id="shift_pay"
+              isInvalid={!!formik.errors.shift_pay && formik.touched.shift_pay}
+            >
+              <FormLabel>Total Pay</FormLabel>
+              <InputGroup>
+                <InputLeftAddon children="$" />
+                <Input type="number" {...formik.getFieldProps("shift_pay")} />
+              </InputGroup>
+              <FormErrorMessage>{formik.errors.shift_pay}</FormErrorMessage>
+            </FormControl>
+          </Stack>
+        </Stack>
+        <Divider />
+        <Flex direction="row-reverse" py="4" px={{ base: "4", md: "6" }}>
+          <Button 
+              onClick={(e) => {
+                console.log("Submit button clicked");
+                console.log("Form values:", formik.values);
+                const form = e.currentTarget.closest("form");
+                if (form) {
+                  form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+                }
               }}
-              onBlur={() => {
-                formik.setFieldTouched("skills_required", true);
-              }}
-              styles={customStyles}
-            />
-            <FormErrorMessage>{formik.errors.skills_required}</FormErrorMessage>
-          </FormControl>
-          <FormControl
-            id="position"
-            isInvalid={!!formik.errors.position && formik.touched.position}
-          >
-            <FormLabel>Position</FormLabel>
-            <Select {...formik.getFieldProps("position")}>
-              {positions.map((position) => (
-                <option key={position.value} value={position.value}>
-                  {position.label}
-                </option>
-              ))}
-            </Select>
-            <FormErrorMessage>{formik.errors.position}</FormErrorMessage>
-          </FormControl>
-        </Stack>
-        <Stack spacing="6" direction={{ base: "column", md: "row" }}>
-          <FormControl
-            id="experience"
-            isInvalid={
-              !!formik.errors.experience &&
-              formik.touched.experience
-            }
-          >
-            <FormLabel>Experience Required</FormLabel>
-            <Select {...formik.getFieldProps("experience")}>
-              {experiences.map((experience) => (
-                <option key={experience.value} value={experience.value}>
-                  {experience.label}
-                </option>
-              ))}
-            </Select>
-            <FormErrorMessage>
-              {formik.errors.experience}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl
-            id="start_date"
-            isInvalid={!!formik.errors.start_date && formik.touched.start_date}
-          >
-            <FormLabel>Start Date</FormLabel>
-            <Input type="date" {...formik.getFieldProps("start_date")} />
-            <FormErrorMessage>{formik.errors.start_date}</FormErrorMessage>
-          </FormControl>
-        </Stack>
-        <Stack spacing="6" direction={{ base: "column", md: "row" }}>
-          <FormControl
-            id="start_time"
-            isInvalid={!!formik.errors.start_time && formik.touched.start_time}
-          >
-            <FormLabel>Start Time</FormLabel>
-            <Input type="time" {...formik.getFieldProps("start_time")} />
-            <FormErrorMessage>{formik.errors.start_time}</FormErrorMessage>
-          </FormControl>
-          <FormControl
-            id="shift_hours"
-            isInvalid={!!formik.errors.shift_hours && formik.touched.shift_hours}
-          >
-            <FormLabel>Hours</FormLabel>
-            <Input type="number" {...formik.getFieldProps("shift_hours")} />
-            <FormErrorMessage>{formik.errors.shift_hours}</FormErrorMessage>
-          </FormControl>
-        </Stack>
-        <Stack spacing="6" direction={{ base: "column", md: "row" }}>
-          <FormControl
-            id="shift_pay"
-            isInvalid={!!formik.errors.shift_pay && formik.touched.shift_pay}
-          >
-            <FormLabel>Total Pay</FormLabel>
-            <Input type="number" {...formik.getFieldProps("shift_pay")} />
-            <FormErrorMessage>{formik.errors.shift_pay}</FormErrorMessage>
-          </FormControl>
-        </Stack>
-        <Button type="submit" variant="primary">
-          Save
-        </Button>
-      </Stack>
-      <Divider />
-      <Flex direction="row-reverse" py="4" px={{ base: "4", md: "6" }}>
-        <Button type="submit" variant="primary" bg="blue">
-          Save
-        </Button>
-      </Flex>
+              variant="primary" 
+              bg="blue">
+            Save
+          </Button>
+        </Flex>
+      </form>
     </Box>
   );
 };

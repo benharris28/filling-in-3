@@ -5,6 +5,26 @@ interface ShiftProps {
   shift: UploadShift;
 }
 
+
+
+export const findUserByAuth0Id = async (auth0Id: string) => {
+  const base = new Airtable({
+    apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+  }).base("appHZw8p3zb6QrFz3");
+
+  const usersTable = base("Users");
+  const query = await usersTable.select({
+    filterByFormula: `{user_id} = '${auth0Id}'`,
+    maxRecords: 1,
+  }).firstPage();
+
+  if (query.length === 0) {
+    throw new Error("User not found");
+  }
+
+  return query[0];
+};
+
 export async function getShifts() {
   // Initialize the Airtable client with the API key
   const base = new Airtable({
@@ -57,6 +77,8 @@ export async function addUserToTable(user_id: string, email: string) {
 }
 
 export async function addShiftToTable({ shift }: ShiftProps) {
+  console.log("addShiftToTable called with shift:", shift);
+  const userRecord = await findUserByAuth0Id(shift.user_id);
   const base = new Airtable({
     apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
   }).base("appHZw8p3zb6QrFz3");
@@ -65,10 +87,9 @@ export async function addShiftToTable({ shift }: ShiftProps) {
     {
       fields: {
         uuid: shift.uuid,
-        user_id: shift.user_id,
+        user_id: [userRecord.getId()],
         shift_title: shift.shift_title,
         position: shift.position,
-        clinic_name: shift.clinic_name,
         skills_required: shift.skills_required,
         city: shift.city,
         start_date: shift.start_date,
