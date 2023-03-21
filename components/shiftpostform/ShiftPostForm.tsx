@@ -287,7 +287,7 @@ export const ShiftPostForm = ({ ...props }: ShiftPostFormProps) => {
             >
               <FormLabel>Total Pay</FormLabel>
               <InputGroup>
-                <InputLeftAddon children="$" />
+              <InputLeftAddon>$</InputLeftAddon>
                 <Input type="number" {...formik.getFieldProps("shift_pay")} />
               </InputGroup>
               <FormErrorMessage>{formik.errors.shift_pay}</FormErrorMessage>
