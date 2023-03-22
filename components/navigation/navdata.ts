@@ -17,7 +17,7 @@ export const items = [
     links: [
       {
         title: 'Sign up as a practitioner',
-        description: 'Dragée jujubes brownie pastry biscuit croissant wafer halva apple.',
+        description: 'Dragée jujubes brownie pastry biscuit croissant wafer halva apple test.',
         href: '#',
         icon: FiGrid,
       },
