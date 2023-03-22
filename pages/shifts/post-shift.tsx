@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Container, Heading, Stack, Text, Link, Button } from "@chakra-ui/react";
 import PageHeaderCentered from "@/components/page-header/PageHeaderCentered"
 import { ShiftPostForm } from "@/components/shiftpostform/ShiftPostForm";
 import Navbar from "@/components/navigation/Navbar"
@@ -9,12 +9,32 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 //Must check that user is authenticated and approved before loading page
 
 export default function PostShift() {
-    const { user, isLoading } = useUser();
+    const { user, error, isLoading } = useUser();
     
     return (
         <>
         {isLoading && <Box>Loading...</Box>}
         <Navbar />
+
+        {error && (
+        <>
+          <Box as="section">Error</Box>
+          <pre>{error.message}</pre>
+        </>
+      )}
+
+        {!user && 
+            <Box as="section">
+                Please login to view this page
+                <Link variant="menu" href={'/api/auth/login?returnTo=/shifts/post-shift'}>
+                    <Button>
+                        Login
+                    </Button>
+                </Link>
+            </Box>
+        }
+
+        {user && 
         <Container bgColor='white'>
             <Stack display='flex' justifyContent='center' alignItems='center' bgColor='white'>
                 <PageHeaderCentered />
@@ -22,6 +42,7 @@ export default function PostShift() {
             </Stack>
             
         </Container>
+}
             
             
         </>

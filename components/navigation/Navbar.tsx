@@ -37,9 +37,15 @@ import {
                     <Button>Support</Button>
                   </ButtonGroup>
                   {user ? (
+                    <HStack spacing="3">
+                      <Link href='/profile/dashboard'>
+                      <Button colorScheme="pink" variant='outline'>Profile</Button>
+                    </Link>
                     <Link href='/api/auth/logout'>
                       <Button colorScheme="pink" variant='outline'>Logout</Button>
                     </Link>
+                   
+                    </HStack>
                     
                   ) : 
                   <HStack spacing="3">
