@@ -6,7 +6,7 @@ export const items = [
     links: [
       {
         title: 'Sign up as a clinic',
-        description: 'Dan lollipop marzipan dragée gingerbread tart wafer sweet.',
+        description: 'Dan lollipop marzipan dragée gingerbread ttsart wafer sweet.',
         href: '/api/auth/login?returnTo=/profile/dashboard',
         icon: FiBarChart,
       },
