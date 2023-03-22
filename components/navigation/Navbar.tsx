@@ -16,6 +16,7 @@ import {
   import { PopoverIcon } from './PopoverIcon'
   import { ResourcesSubmenu } from './ResourcesSubmenu'
   import { useUser } from '@auth0/nextjs-auth0/client';
+  import { NavLogo } from './NavLogo'
   
   export default function Navbar() {
     const { user } = useUser();
@@ -23,10 +24,10 @@ import {
     const { onToggle, isOpen } = useDisclosure({ defaultIsOpen: false })
     return (
       <Box as="section">
-        <Box as="nav" bg="bg-canvas">
+        <Box as="nav" bg="red.100">
           <Container py={{ base: '4', lg: '5' }}>
             <HStack spacing="10" justify="space-between">
-              <Text>Filling In</Text>
+              <NavLogo />
               {isDesktop ? (
                 <Flex justify="space-between" flex="1">
                   <ButtonGroup variant="link" spacing="8">
