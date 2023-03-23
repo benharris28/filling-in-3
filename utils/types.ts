@@ -26,6 +26,7 @@ export interface UserData {
     skills_required: string[];
     city: string;
     start_date: string;
+    start_time: string;
     hours: number;
     total_pay: number;
     shift_overview: string;

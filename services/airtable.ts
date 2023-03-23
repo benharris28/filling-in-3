@@ -105,6 +105,7 @@ export async function addShiftToTable({ shift }: ShiftProps) {
         skills_required: shift.skills_required,
         city: shift.city,
         start_date: shift.start_date,
+        start_time: shift.start_time,
         hours: shift.hours,
         total_pay: shift.total_pay,
         shift_overview: shift.shift_overview,

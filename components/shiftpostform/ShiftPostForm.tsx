@@ -307,7 +307,7 @@ export const ShiftPostForm = ({ ...props }: ShiftPostFormProps) => {
               }}
               variant="primary" 
               bg="blue">
-            Save
+            Submit
           </Button>
         </Flex>
       </form>

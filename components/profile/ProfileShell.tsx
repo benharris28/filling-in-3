@@ -9,6 +9,7 @@ import {
     Stack,
     Text,
     useBreakpointValue,
+    Link
   } from '@chakra-ui/react'
   import { FiDownloadCloud } from 'react-icons/fi'
   import { Navbar } from './Navbar'
@@ -73,8 +74,11 @@ import {
                   </Stack>
                   <HStack spacing="3">
                  
-                 {airtableUser && airtableUser.user_type === 'clinic' && 
+                 {airtableUser && airtableUser.user_type === 'clinic' &&
+                 <Link href='/shifts/post-shift'>
                   <Button colorScheme='pink'>Post a Shift</Button>
+                 </Link> 
+                  
                   }
                 </HStack>
                 </Stack>

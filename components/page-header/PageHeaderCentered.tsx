@@ -15,14 +15,14 @@ export default function PageHeaderCentered() {
               fontWeight="medium"
               color="accent"
             >
-              Pricing
+              Shifts
             </Text>
             <Heading size={{ base: "md", md: "lg" }} fontWeight="semibold">
-              Get lifetime access
+              Post a shift here
             </Heading>
           </Stack>
           <Text color="muted" fontSize={{ base: "lg", md: "xl" }} maxW="3xl">
-            Get early access to 210+ components and free updates.
+            Tell us about your shift and we'll get it online
           </Text>
         </Stack>
       </Container>

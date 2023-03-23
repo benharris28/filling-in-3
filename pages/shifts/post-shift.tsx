@@ -64,7 +64,8 @@ export default function PostShift() {
         {user && 
         <Container bgColor='white'>
             <Stack display='flex' justifyContent='center' alignItems='center' bgColor='white'>
-                <PageHeaderCentered />
+                <PageHeaderCentered 
+                />
                 <ShiftPostForm />
             </Stack>
             
