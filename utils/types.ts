@@ -7,6 +7,16 @@ export interface UserData {
     user_type: string;
   }
 
+  export interface AirtableUserData {
+    user_id: string | null;
+    first_name: string | null;
+    last_name: string| null;
+    status: string | null;
+    user_type: string | null;
+    clinic_name: string | null;
+    email: string | null;
+  }
+
   export interface UploadShift {
     user_id: string;
     uuid: string;

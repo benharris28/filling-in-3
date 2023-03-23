@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
 import { Box, Container, Heading, Stack, Text, Link, Button } from "@chakra-ui/react";
 import PageHeaderCentered from "@/components/page-header/PageHeaderCentered"
 import { ShiftPostForm } from "@/components/shiftpostform/ShiftPostForm";
+import { fetchUserFromAirtable } from "@/services/airtable";
 import Navbar from "@/components/navigation/Navbar"
 import { useUser } from '@auth0/nextjs-auth0/client';
 
@@ -10,7 +12,32 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function PostShift() {
     const { user, error, isLoading } = useUser();
+    const [airtableUser, setAirtableUser] = useState({});
+    console.log(airtableUser)
     
+    
+
+    useEffect(() => {
+        const userId = user?.sub;
+        
+        if (userId) {
+            const fetchUser = async () => {
+                const fetchedUser = await fetchUserFromAirtable(userId)
+
+                if (fetchedUser) {
+                    setAirtableUser(fetchedUser)
+                } else {
+                    setAirtableUser({})
+                }
+            }
+          
+            fetchUser();
+           
+        }
+      }, [user]);
+    
+      console.log(airtableUser)
+
     return (
         <>
         {isLoading && <Box>Loading...</Box>}

@@ -15,17 +15,20 @@ import {
   import Sidebar from './Sidebar'
   import { ShiftPostForm } from '../shiftpostform/ShiftPostForm'
   import ProfileShiftList from './ProfileShiftList'
-  import { UserData, Shift, Application, Auth0User } from '../../utils/types';
+  import { UserData, Shift, Application, Auth0User, AirtableUserData } from '../../utils/types';
   
-  interface ShiftProps {
+  interface ShellProps {
     shifts: Shift[];
+    airtableUser: AirtableUserData;
   }
+
+  
 
   interface UserProps {
     user: Auth0User
   }
 
-  export default function ProfileShell({ shifts }: ShiftProps) {
+  export default function ProfileShell({ shifts, airtableUser }: ShellProps) {
     console.log(shifts)
     const isDesktop = useBreakpointValue({ base: false, lg: true })
     const [selectedNavButton, setSelectedNavButton] = useState<string | null>(null); // track currently selected navbutton
@@ -70,7 +73,9 @@ import {
                   </Stack>
                   <HStack spacing="3">
                  
+                 {airtableUser && airtableUser.user_type === 'clinic' && 
                   <Button colorScheme='pink'>Post a Shift</Button>
+                  }
                 </HStack>
                 </Stack>
                 <Box bg="bg-surface" borderRadius="lg" borderWidth="1px" height="full">

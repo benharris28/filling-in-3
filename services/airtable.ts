@@ -25,6 +25,18 @@ export const findUserByAuth0Id = async (auth0Id: string) => {
   return query[0];
 };
 
+export const fetchUserFromAirtable = async (auth0Id: string) => {
+  const base = new Airtable({
+    apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+  }).base("appHZw8p3zb6QrFz3");
+
+  const users = await base('Users').select({
+    filterByFormula: `{user_id} = '${auth0Id}'`,
+  }).firstPage();
+  
+  return users[0];
+};
+
 export async function getShifts() {
   // Initialize the Airtable client with the API key
   const base = new Airtable({
