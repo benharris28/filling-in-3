@@ -22,7 +22,7 @@ export default function PageHeaderCentered() {
             </Heading>
           </Stack>
           <Text color="muted" fontSize={{ base: "lg", md: "xl" }} maxW="3xl">
-            Tell us about your shift and we'll get it online
+            Tell us about your shift and get it posted online
           </Text>
         </Stack>
       </Container>
