@@ -8,7 +8,9 @@ import {
   Wrap,
   HStack,
   Icon,
-  Flex
+  Flex,
+  LinkBox,
+  LinkOverlay
 } from "@chakra-ui/react";
 import { GoCalendar, GoGlobe, GoClock, GoPerson } from "react-icons/go";
 
@@ -38,9 +40,9 @@ function JobCard({
   total_pay,
 }: JobCardProps) {
   return (
-    <Box as="section" py={{ base: "0", md: "0" }}>
+    <Box py={{ base: "0", md: "0" }}>
       <Container maxW='3xl' px='0'>
-        <Box
+        <LinkBox
           bg="bg-surface"
           boxShadow="sm"
           borderRadius="lg"
@@ -50,9 +52,13 @@ function JobCard({
           <Stack spacing="2">
             <Stack spacing="1">
               <Flex justifyContent="space-between" alignItems="center">
+              
               <Text fontSize="lg" fontWeight="medium">
+              <LinkOverlay href={`/shifts/${uuid}`}>
                 {shift_title}
+                </LinkOverlay>
               </Text>
+              
               <Button variant="secondary">Apply</Button>
 
               </Flex>
@@ -94,7 +100,7 @@ function JobCard({
               
             </Stack>
           </Stack>
-        </Box>
+        </LinkBox>
       </Container>
     </Box>
   );

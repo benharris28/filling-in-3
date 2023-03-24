@@ -50,9 +50,10 @@ export default function ShiftCardList({ shifts, filters }: JobsProps) {
     <Box p="4">
       <SimpleGrid columns={[1]} spacing="2" overflow='scroll'>
         {filteredShifts.map((shift) => (
-          <Link key={shift.uuid} href={`/shifts/${shift.uuid}`}>
+          
             <JobCard
               id={shift.id}
+              key={shift.uuid}
               uuid={shift.uuid}
               shift_title={shift.shift_title}
               position={shift.position}
@@ -63,7 +64,7 @@ export default function ShiftCardList({ shifts, filters }: JobsProps) {
               hours={shift.hours}
               total_pay={shift.total_pay}
             />
-          </Link>
+        
         ))}
       </SimpleGrid>
     </Box>

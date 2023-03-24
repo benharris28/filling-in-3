@@ -19,6 +19,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       heading: "'Inter', -apple-system, system-ui, sans-serif",
       body: "'Inter', -apple-system, system-ui, sans-serif",
     },
+    components: {
+      Link: {
+        baseStyle: {
+          textDecoration: 'none',
+        },
+        defaultProps: {
+          textDecoration: 'none',
+        },
+      },
+    },
     ...proTheme,
 })
   

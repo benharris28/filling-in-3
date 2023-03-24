@@ -18,7 +18,7 @@ export const items = [
       {
         title: 'Sign up as a practitioner',
         description: 'Dragée test jujubes brownie pastry biscuit croissant wafer halva apple test.',
-        href: '#',
+        href: '/api/auth/login?returnTo=/profile/dashboard',
         icon: FiGrid,
       },
      
