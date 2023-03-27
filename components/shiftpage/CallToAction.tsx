@@ -1,4 +1,5 @@
 import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react'
+import { ApplicationReady } from '../../utils/types';
 
 interface Shift {
   uuid: string;
@@ -16,9 +17,10 @@ interface Shift {
 
 interface ShiftProps {
   shift: Shift;
+  can_apply: boolean;
 }
 
-export default function CallToAction({shift} : ShiftProps) {
+export default function CallToAction({shift, can_apply} : ShiftProps) {
     return (
   <Container py={{ base: '16', md: '24' }}>
     <Box
@@ -35,12 +37,14 @@ export default function CallToAction({shift} : ShiftProps) {
             Sign up for this shift with a few clicks
           </Text>
         </Stack>
+        {can_apply &&
         <Stack spacing="3" direction={{ base: 'column', sm: 'row' }} justify={{ base: 'start' }}>
           <Button colorScheme="pink" size="lg">
             Apply
           </Button>
          
         </Stack>
+}
       </Stack>
     </Box>
   </Container>

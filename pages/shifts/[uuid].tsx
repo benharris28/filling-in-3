@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import { getShiftByUuid, getShifts } from '@/services/airtable';
+import { useAirtableUser } from '@/contexts/UserDataContext';
 import PageHeader from "@/components/shiftpage/PageHeader"
 import ShiftPageBody from "@/components/shiftpage/ShiftPageBody"
 import CallToAction from "@/components/shiftpage/CallToAction"
 import Navbar from '@/components/navigation/Navbar'
+import { ApplicationReady } from '../../utils/types';
 
 //Pull data in here
 interface Shift {
@@ -24,10 +26,21 @@ interface ShiftProps {
     shift: Shift;
   }
 
+
+
 export default function ShiftPage({ shift }: ShiftProps) {
     const router = useRouter();
-    
+    const { airtableUser } = useAirtableUser();
 
+    const canApply =
+      airtableUser &&
+    airtableUser.status === 'Approved' &&
+    airtableUser.user_type === 'Practitioner';
+
+    console.log(canApply)
+    console.log(airtableUser)
+    
+    
     if (router.isFallback) {
         return <div>Loading....</div>;
       }
@@ -39,7 +52,7 @@ export default function ShiftPage({ shift }: ShiftProps) {
             <Navbar />
             <PageHeader shift={shift} />
             <ShiftPageBody shift={shift} />
-            <CallToAction shift={shift} />
+            <CallToAction can_apply={canApply} shift={shift} />
         </div>
     )
 }

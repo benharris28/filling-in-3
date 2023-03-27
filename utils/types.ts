@@ -7,6 +7,10 @@ export interface UserData {
     user_type: string;
   }
 
+  export interface ApplicationReady {
+    can_apply: boolean;
+  }
+
   export interface AirtableUserData {
     user_id: string | null;
     first_name: string | null;

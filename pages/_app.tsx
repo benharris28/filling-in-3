@@ -2,6 +2,7 @@ import { theme as proTheme } from '@chakra-ui/pro-theme'
 import { ChakraProvider, extendTheme, theme as baseTheme } from '@chakra-ui/react'
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import type { AppProps } from 'next/app'
+import { AirtableUserProvider } from "@/contexts/UserDataContext";
 import '@fontsource/inter/variable.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -35,7 +36,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
     <ChakraProvider theme={theme}>
+    <AirtableUserProvider>
       <Component {...pageProps} />
+    </AirtableUserProvider>
     </ChakraProvider>
     </UserProvider>
   )
