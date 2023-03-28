@@ -18,9 +18,13 @@ interface Shift {
 interface ShiftProps {
   shift: Shift;
   can_apply: boolean;
+  onApplyClick: () => void;
 }
 
-export default function CallToAction({shift, can_apply} : ShiftProps) {
+export default function CallToAction({shift, can_apply, onApplyClick } : ShiftProps) {
+  const applyButton = !can_apply 
+  console.log(applyButton)
+
     return (
   <Container py={{ base: '16', md: '24' }}>
     <Box
@@ -37,14 +41,14 @@ export default function CallToAction({shift, can_apply} : ShiftProps) {
             Sign up for this shift with a few clicks
           </Text>
         </Stack>
-        {can_apply &&
+        
         <Stack spacing="3" direction={{ base: 'column', sm: 'row' }} justify={{ base: 'start' }}>
-          <Button colorScheme="pink" size="lg">
+          <Button isDisabled={applyButton} colorScheme="pink" size="lg" onClick={onApplyClick}>
             Apply
           </Button>
          
         </Stack>
-}
+
       </Stack>
     </Box>
   </Container>

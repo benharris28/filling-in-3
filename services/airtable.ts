@@ -1,5 +1,5 @@
 import Airtable from "airtable";
-import { UploadShift } from "../utils/types";
+import { UploadShift, Application } from "../utils/types";
 
 interface ShiftProps {
   shift: UploadShift;
@@ -35,6 +35,20 @@ export const fetchUserFromAirtable = async (auth0Id: string) => {
   }).firstPage();
   
   return users[0];
+};
+
+export const createApplication = async (application: Application) => {
+  try {
+    const base = new Airtable({
+      apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+    }).base("appHZw8p3zb6QrFz3");
+
+    const record = await base('Applications').create(application);
+    return record;
+  } catch (error) {
+    console.error('Error creating application:', error);
+    throw error;
+  }
 };
 
 export async function getShifts() {

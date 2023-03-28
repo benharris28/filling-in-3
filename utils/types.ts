@@ -7,6 +7,14 @@ export interface UserData {
     user_type: string;
   }
 
+  export type Application = {
+    shift_uuid: string[];
+    applicant_user_id: string;
+    application_uuid: string;
+    application_date: string;
+    status: string;
+  };
+
   export interface ApplicationReady {
     can_apply: boolean;
   }
@@ -53,13 +61,7 @@ export interface UserData {
     requirements: string | null;
   };
   
-  export interface Application {
-    id: string;
-    shift_uuid: string;
-    applicant_id: string;
-    application_date: string;
-    status: string;
-  }
+
 
   export interface Auth0User {
     email: string;
