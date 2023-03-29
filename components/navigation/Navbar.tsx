@@ -29,11 +29,14 @@ export default function Navbar() {
       <Box as="nav" bg="red.100">
         <Container py={{ base: "4", lg: "5" }}>
           <HStack spacing="10" justify="space-between">
+          <Link href="/">
             <NavLogo />
+          </Link>
             {isDesktop ? (
               <Flex justify="space-between" flex="1">
                 <ButtonGroup variant="link" spacing="8">
-                  <Button>Shifts</Button>
+               
+                  <Button as="a" href="/shifts" variant="link">Shifts</Button>
                   <Button>Pricing</Button>
 
                   <Button>Support</Button>
