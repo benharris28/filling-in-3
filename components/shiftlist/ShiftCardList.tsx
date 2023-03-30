@@ -1,5 +1,5 @@
 import { Box, SimpleGrid, Link } from "@chakra-ui/react";
-import JobCard from "./JobCard";
+import JobCard from "../jobcard/JobCard";
 
 interface JobsProps {
   shifts: Shift[];

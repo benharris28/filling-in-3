@@ -6,10 +6,10 @@ import { PriceRangePicker } from './PriceRangePicker'
 import { SizePicker } from './SizePicker'
 import { SortBySelect } from './SortBySelect'
 import { MobileFilter } from './MobileFilter'
-import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter, cityFilter } from '../data/data'
+import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter, cityFilter } from '../../data/data'
 import ShiftCardList, { Shift } from "./ShiftCardList";
-import CenteredPageHeader from "./CenteredPageHeader";
-import { getShifts } from "../services/airtable";
+import CenteredPageHeader from "../CenteredPageHeader";
+import { getShifts } from "../../services/airtable";
 
 
 interface Filters {

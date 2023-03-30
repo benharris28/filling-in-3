@@ -1,6 +1,6 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import { Box, SimpleGrid, Link, useBreakpointValue } from "@chakra-ui/react";
-import JobCard from "../JobCard";
+import JobCard from "../jobcard/JobCard";
 import { UserData, Shift, Application, Auth0User } from '../../utils/types';
 
 interface UserShiftListProps {

@@ -17,7 +17,7 @@ import {
   import { PriceRangePicker } from './PriceRangePicker'
   import { SizePicker } from './SizePicker'
   import { SortBySelect } from './SortBySelect'
-  import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter, cityFilter } from '../data/data'
+  import { pinkFilters, breadcrumbData, colorFilter, genderFilter, sizeFilter, skillsFilter, roleFilter, cityFilter } from '../../data/data'
   
   interface MobileFilterProps {
     handleFilterChange: (filterType: string, selectedOptions: string | string[]) => void;

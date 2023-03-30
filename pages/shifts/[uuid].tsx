@@ -44,14 +44,11 @@ export default function ShiftPage({ shift }: ShiftProps) {
     airtableUser.status === "Approved" &&
     airtableUser.user_type === "Practitioner";
 
-  console.log(canApply);
-  console.log(airtableUser);
 
   if (router.isFallback) {
     return <div>Loading....</div>;
   }
 
-  console.log(shift);
 
   return (
     <div>
