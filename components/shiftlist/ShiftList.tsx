@@ -61,7 +61,8 @@ return (
     
     <Box mt={{ base: '8', md: '16' }}>
       <Grid templateColumns={{ base: '1fr', md: '240px 1fr' }} gap="14">
-        <Stack spacing="10" maxW="240px" display={{ base: 'none', md: 'flex' }}>
+        <Box>
+        <Stack spacing="10" maxW="240px" display={{ base: 'none', md: 'flex' }} position="sticky" top="100px">
           <CheckboxFilter 
             spacing="3" 
             options={skillsFilter.options} 
@@ -92,6 +93,7 @@ return (
             </HStack>
           </Stack>
         </Stack>
+        </Box>
 
         <Box>
           <Stack

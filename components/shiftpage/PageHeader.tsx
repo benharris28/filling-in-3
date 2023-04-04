@@ -43,7 +43,7 @@ export default function PageHeader({ shift }: ShiftProps) {
       as="section"
       bg="gray.50"
       pt={{ base: "4", md: "8" }}
-      pb={{ base: "12", md: "24" }}
+      pb={{ base: "12", md: "12" }}
     >
       <Container>
         <Stack>

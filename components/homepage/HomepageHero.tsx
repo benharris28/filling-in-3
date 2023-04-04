@@ -12,7 +12,7 @@ import {
 
 export default function HomepageHero() {
   return (
-    <Box as="section" bg="bg-surface">
+    <Box as="section" bg="bg-surface" paddingTop="60px">
       <Box position="relative" height={{ lg: "720px" }}>
         <Container py={{ base: "16", md: "24" }} height="full">
           <Stack

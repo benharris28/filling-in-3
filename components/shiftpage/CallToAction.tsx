@@ -32,11 +32,11 @@ export default function CallToAction({shift, can_apply, onApplyClick } : ShiftPr
       boxShadow="sm"
       borderRadius="xl"
       px={{ base: '6', lg: '16' }}
-      py={{ base: '10', lg: '16' }}
+      py={{ base: '10', lg: '12' }}
     >
       <Stack spacing="8" direction={{ base: 'column', lg: 'row' }} justify="space-between">
         <Stack spacing="4" maxW="2xl">
-          <Heading size="sm">Ready to Apply?</Heading>
+          <Heading size="xs">Ready to Apply?</Heading>
           <Text color="muted" fontSize={{ base: 'lg', lg: 'xl' }}>
             Sign up for this shift with a few clicks
           </Text>

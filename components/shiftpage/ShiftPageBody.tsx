@@ -25,7 +25,7 @@ export default function ShiftPageBody({shift} : ShiftProps) {
     <Container>
       <Stack spacing="4" direction={{ base: 'column', md: 'row' }} justify="space-between">
         <Stack spacing="1">
-          <Heading size={{ base: 'xs', md: 'sm' }} fontWeight="medium">
+          <Heading size={{ base: 'xs', md: 'xs' }} fontWeight="medium">
             Shift Overview
           </Heading>
           <Text>

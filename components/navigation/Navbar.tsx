@@ -19,13 +19,14 @@ import { PopoverIcon } from "./PopoverIcon";
 import { ResourcesSubmenu } from "./ResourcesSubmenu";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { NavLogo } from "./NavLogo";
+import MobileNavbar from './MobileNavbar'
 
 export default function Navbar() {
   const { user } = useUser();
   const isDesktop = useBreakpointValue({ base: false, lg: true });
-  const { onToggle, isOpen } = useDisclosure({ defaultIsOpen: false });
+  const { onToggle, onOpen, onClose, isOpen } = useDisclosure({ defaultIsOpen: false });
   return (
-    <Box as="section">
+    <Box as="section" position="fixed" top={0} width="100%" height="73px" zIndex="2">
       <Box as="nav" bg="red.100">
         <Container py={{ base: "4", lg: "5" }}>
           <HStack spacing="10" justify="space-between">
@@ -76,6 +77,7 @@ export default function Navbar() {
                 variant="ghost"
                 icon={<FiMenu fontSize="1.25rem" />}
                 aria-label="Open Menu"
+                onClick={onOpen}
               />
             )}
           </HStack>
@@ -83,6 +85,7 @@ export default function Navbar() {
         <Divider />
       </Box>
       {isOpen && <ResourcesSubmenu isOpen={isDesktop && isOpen} />}
+      <MobileNavbar isOpen={isOpen} onClose={onClose} user={user} />
     </Box>
   );
 }

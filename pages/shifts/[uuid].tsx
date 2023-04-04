@@ -8,6 +8,7 @@ import CallToAction from "@/components/shiftpage/CallToAction";
 import Navbar from "@/components/navigation/Navbar";
 import ApplyModal from "@/components/application/ApplyModal";
 import { ApplicationReady } from "../../utils/types";
+import { Box } from '@chakra-ui/react';
 
 //Pull data in here
 interface Shift {
@@ -53,6 +54,7 @@ export default function ShiftPage({ shift }: ShiftProps) {
   return (
     <div>
       <Navbar />
+      <Box paddingTop="73px">
       <PageHeader shift={shift} />
       <ShiftPageBody shift={shift} />
       <CallToAction can_apply={canApply} shift={shift} onApplyClick={openModal}/>
@@ -62,6 +64,7 @@ export default function ShiftPage({ shift }: ShiftProps) {
         shift_uuid={shift.uuid}
         shift_id={shift.id}
       />
+      </Box>
     </div>
   );
 }
