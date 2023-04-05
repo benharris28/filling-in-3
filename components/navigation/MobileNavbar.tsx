@@ -1,4 +1,6 @@
-import { Box, Button, Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, Link } from "@chakra-ui/react";
+import { Box, Button, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerCloseButton, Link, Flex, Stack } from "@chakra-ui/react";
+import { NavLogo } from "./NavLogo";
+import { NavAccordion } from './NavAccordion'
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -8,17 +10,19 @@ interface MobileMenuProps {
 
 const MobileNavbar: React.FC<MobileMenuProps> = ({ isOpen, onClose, user }) => {
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} placement="left">
+    <Drawer isOpen={isOpen} onClose={onClose} placement="left" size="full">
       <DrawerOverlay>
         <DrawerContent>
-          <DrawerCloseButton />
+        <DrawerHeader padding="0">
+        <Flex height="16" align="center" justify="space-between" px="5">
+            <NavLogo />
+            <DrawerCloseButton />
+        </Flex>
+        </DrawerHeader>
+          
           {/* Mobile menu content */}
-          <Box p={4}>
-            <Button as="a" href="/shifts" variant="link" onClick={onClose}>
-              Shifts
-            </Button>
-            <Button onClick={onClose}>Pricing</Button>
-            <Button onClick={onClose}>Support</Button>
+          <Box p={4} textAlign="left">
+            <NavAccordion onClickMenu={onClose} />
             {user ? (
               <>
                 <Link href="/profile/dashboard">
