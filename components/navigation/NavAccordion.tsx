@@ -50,7 +50,7 @@ import {
   export const NavAccordion = ({ onClickMenu }: { onClickMenu: VoidFunction }) => {
     const links = [
         { icon: FiCompass, label: 'Home', href: '#' },
-        { icon: FiBook, label: 'Featured Work', href: "#featured-work" },
+        { icon: FiBook, label: 'Shifts', href: "/shifts" },
        
 
     ]

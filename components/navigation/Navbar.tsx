@@ -25,6 +25,12 @@ export default function Navbar() {
   const { user } = useUser();
   const isDesktop = useBreakpointValue({ base: false, lg: true });
   const { onToggle, onOpen, onClose, isOpen } = useDisclosure({ defaultIsOpen: false });
+  const {
+    onOpen: onMobileOpen,
+    onClose: onMobileClose,
+    isOpen: isMobileOpen
+  } = useDisclosure({ defaultIsOpen: false });
+
   return (
     <Box as="section" position="fixed" top={0} width="100%" height="73px" zIndex="2">
       <Box as="nav" bg="red.100">
@@ -77,7 +83,7 @@ export default function Navbar() {
                 variant="ghost"
                 icon={<FiMenu fontSize="1.25rem" />}
                 aria-label="Open Menu"
-                onClick={onOpen}
+                onClick={onMobileOpen}
               />
             )}
           </HStack>
@@ -85,7 +91,7 @@ export default function Navbar() {
         <Divider />
       </Box>
       {isOpen && <ResourcesSubmenu isOpen={isDesktop && isOpen} />}
-      <MobileNavbar isOpen={isOpen} onClose={onClose} user={user} />
+      <MobileNavbar isOpen={isMobileOpen} onClose={onMobileClose} user={user} />
     </Box>
   );
 }

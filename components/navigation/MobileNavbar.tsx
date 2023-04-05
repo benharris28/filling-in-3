@@ -1,6 +1,7 @@
-import { Box, Button, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerCloseButton, Link, Flex, Stack } from "@chakra-ui/react";
+import { Box, Button, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, DrawerCloseButton, Link, Flex, HStack, LinkBox, LinkOverlay } from "@chakra-ui/react";
 import { NavLogo } from "./NavLogo";
 import { NavAccordion } from './NavAccordion'
+import { ResourcesSubmenu } from "./ResourcesSubmenu";
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -19,36 +20,54 @@ const MobileNavbar: React.FC<MobileMenuProps> = ({ isOpen, onClose, user }) => {
             <DrawerCloseButton />
         </Flex>
         </DrawerHeader>
-          
+        <DrawerBody>
           {/* Mobile menu content */}
           <Box p={4} textAlign="left">
             <NavAccordion onClickMenu={onClose} />
             {user ? (
-              <>
-                <Link href="/profile/dashboard">
-                  <Button colorScheme="pink" variant="outline" onClick={onClose}>
-                    Profile
-                  </Button>
-                </Link>
-                <Link href="/api/auth/logout">
-                  <Button colorScheme="pink" variant="outline" onClick={onClose}>
-                    Logout
-                  </Button>
-                </Link>
-              </>
+              <HStack mt="6">
+                <LinkBox flex="1">
+                      <LinkOverlay href="/profile/dashboard">
+                      <Button width="100%" colorScheme="pink"  onClick={onClose}>
+                        Profile
+                      </Button>
+                      </LinkOverlay>
+                      
+                    </LinkBox>
+                    <LinkBox flex="1">
+                      <LinkOverlay href="/api/auth/logout">
+                      <Button width="100%" colorScheme="pink" variant="outline" onClick={onClose}>
+                        Logout
+                      </Button>
+                      </LinkOverlay>
+                      
+                    </LinkBox>
+                
+                
+               
+              </HStack>
             ) : (
-              <>
-                <Link href="/api/auth/login?returnTo=/profile/dashboard">
-                  <Button colorScheme="pink" variant="outline" onClick={onClose}>
-                    Sign in
-                  </Button>
-                </Link>
-                <Button onClick={onClose} colorScheme="pink">
-                  Sign Up
-                </Button>
-              </>
+                <HStack mt="6">
+                 <LinkBox flex="1">
+                      <LinkOverlay href="/api/auth/login?returnTo=/profile/dashboard">
+                      <Button width="100%" colorScheme="pink" variant="outline">
+                        Sign in
+                      </Button>
+                      </LinkOverlay>
+                      
+                    </LinkBox>
+                    <LinkBox flex="1">
+                      <LinkOverlay href="/api/auth/login?returnTo=/profile/dashboard">
+                      <Button width="100%" colorScheme="pink" variant="outline">
+                        Sign up
+                      </Button>
+                      </LinkOverlay>
+                      
+                    </LinkBox>
+              </HStack>
             )}
           </Box>
+          </DrawerBody>
         </DrawerContent>
       </DrawerOverlay>
     </Drawer>
