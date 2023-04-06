@@ -18,10 +18,7 @@ export default function UserShiftList({ shifts }: UserShiftListProps) {
 
   return (
     <Box p="4" position="relative" height='100%'>
-      <SimpleGrid columns={[1]} spacing="2" h="90%"
-        overflowY="scroll"
-        position="absolute"
-        w="100%">
+      <SimpleGrid columns={[1]} spacing="2" h="90%">
       {shifts.length > 0 && shifts.map((shift) => (
           <Link key={shift.uuid} href={`/shifts/${shift.uuid}`}>
             <JobCard

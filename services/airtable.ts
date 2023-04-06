@@ -104,7 +104,7 @@ export async function addUserToTable(user_id: string, email: string) {
 
 export async function addShiftToTable({ shift }: ShiftProps) {
   console.log("addShiftToTable called with shift:", shift);
-  const userRecord = await findUserByAuth0Id(shift.user_id);
+  const userRecord = await findUserByAuth0Id(shift.clinic_user_id);
   const base = new Airtable({
     apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
   }).base("appHZw8p3zb6QrFz3");
@@ -113,7 +113,7 @@ export async function addShiftToTable({ shift }: ShiftProps) {
     {
       fields: {
         uuid: shift.uuid,
-        user_id: [userRecord.getId()],
+        clinic_user_id: [userRecord.getId()],
         shift_title: shift.shift_title,
         position: shift.position,
         skills_required: shift.skills_required,
@@ -190,7 +190,7 @@ export async function getShiftsForUser(userId: string) {
     apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
   }).base("appHZw8p3zb6QrFz3");
 
-  const filterFormula = `AND({user_id} = '${userId}')`;
+  const filterFormula = `OR({clinic_user_id} = '${userId}', {practitioner_user_id} = '${userId}')`;
 
   const records = await base("Shifts")
     .select({

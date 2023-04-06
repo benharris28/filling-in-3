@@ -51,7 +51,7 @@ export default function PostShift() {
       )}
 
         {!user && 
-            <Box as="section">
+            <Box as="section" paddingTop="73px">
                 Please login to view this page
                 <Link variant="menu" href={'/api/auth/login?returnTo=/shifts/post-shift'}>
                     <Button>
@@ -62,7 +62,7 @@ export default function PostShift() {
         }
 
         {user && 
-        <Container bgColor='white'>
+        <Container bgColor='white' paddingTop="73px">
             <Stack display='flex' justifyContent='center' alignItems='center' bgColor='white'>
                 <PageHeaderCentered 
                 />

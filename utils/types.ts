@@ -30,7 +30,7 @@ export interface UserData {
   }
 
   export interface UploadShift {
-    user_id: string;
+    clinic_user_id: string;
     uuid: string;
     shift_title: string;
     position: string;

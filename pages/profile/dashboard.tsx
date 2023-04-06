@@ -6,6 +6,7 @@ import ProfileShell from '../../components/profile/ProfileShell';
 import { getShiftsForUser, getApplicationsForUser, getUserData, fetchUserFromAirtable } from '../../services/airtable';
 import { UserData, Shift, Application, AirtableUserData } from '../../utils/types';
 import Navbar from '@/components/navigation/Navbar'
+import { Box } from "@chakra-ui/react";
 
 
 
@@ -37,8 +38,7 @@ export default function Dashboard() {
     if (userId) {
       const fetchData = async () => {
         console.log(userId)
-        const fetchedShifts = await getShiftsForUser(userId) as Shift[];;
-        const fetchedApplications = await getApplicationsForUser(userId);
+        const fetchedShifts = await getShiftsForUser(userId) as Shift[];
         const fetchedUser = await fetchUserFromAirtable(userId);
         
         
@@ -79,7 +79,10 @@ export default function Dashboard() {
   return (
     <>
       <Navbar />
-      <ProfileShell airtableUser={airtableUser} shifts={shifts} />
+      <Box paddingTop="73px">
+        <ProfileShell airtableUser={airtableUser} shifts={shifts} />
+      </Box>
+      
     </>
     
   );

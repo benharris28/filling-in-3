@@ -57,10 +57,10 @@ return (
     px={{ base: '4', md: '8', lg: '12' }}
     py={{ base: '6', md: '8', lg: '12' }}
   >
-    <CenteredPageHeader short_title="Shifts" title="Available Shifts" subtitle="These are the available shifts" />
+   
     
     <Box mt={{ base: '8', md: '16' }}>
-      <Grid templateColumns={{ base: '1fr', md: '240px 1fr' }} gap="14">
+      <Grid templateColumns={{ base: '1fr', md: '240px 1fr' }} gap={{ base: '0', md: '14' }}>
         <Box>
         <Stack spacing="10" maxW="240px" display={{ base: 'none', md: 'flex' }} position="sticky" top="100px">
           <CheckboxFilter 

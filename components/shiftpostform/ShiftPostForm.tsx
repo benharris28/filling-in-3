@@ -110,7 +110,7 @@ export const ShiftPostForm = ({ ...props }: ShiftPostFormProps) => {
       const uuid = v4();
       const shift = {
         uuid,
-        user_id: user.sub,
+        clinic_user_id: user.sub,
         hours: Number(values.shift_hours),
         total_pay: Number(values.shift_pay),
         ...values,

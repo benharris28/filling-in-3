@@ -36,7 +36,7 @@ import {
     const { isOpen, onClose, onOpen } = useDisclosure()
     return (
       <>
-        <Flex width="full" justify="space-between" display={{ base: 'flex', md: 'none' }}>
+        <Flex width="full" justify="space-between" display={{ base: 'flex', md: 'none' }} >
           <HStack
             as="button"
             fontSize="sm"
